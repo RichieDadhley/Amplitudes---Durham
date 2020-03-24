@@ -1,0 +1,393 @@
+\chapter{Spinor-Helicity Formalism}
+
+As we just said in the introduction, the idea is to reformulate stuff using the fact that we know that the amplitudes are gauge invariant and only know about on-shell degrees of freedom. The spinor-helicity formalism does just this: it is meant to make the on-shell-ness of the amplitudes manifest, i.e. the momentum is on shell and the polarisation are gauge invariant. 
+
+Consider a 4d \textit{on-shell} momentum. We can rewrite it in a slightly funny way
+\be 
+\label{eqn:pAlphaDotAlpha}
+    p^{\dot{\a}\a} := p_{\mu} (\bar{\sig}^{\mu})^{\dot{\a}\a}  = \begin{pmatrix}
+        p^0+p^3 & p^1-ip^2 \\
+        p^1+ip^2 & p^0-p^3
+    \end{pmatrix}, 
+\ee 
+where 
+\bse 
+    \bar{\sig}^{\mu} = (\b1, -\vec{\sig}) 
+\ese 
+and $\dot{\a},\a=1,2$. This should be familiar from the SUSY course, but to refresh our memories is that locally\footnote{I.e. the Lie algebra.} the Lorentz group is the same as $SU(2)\times SU(2)$. The indices $\a, \dot{\a}$ then correspond to the fundamental representations in the two $SU(2)$s. Elements in each of the $SU(2)$s are known as \textit{spinors}. 
+
+The obvious question is "why do we write the momentum in this seemingly more complicated notation?" The answer comes from considering the determinant of \Cref{eqn:pAlphaDotAlpha}:
+\bse 
+    \det (p^{\dot{\a}\a}) = (p^0)^2 - (\vec{p})^2 = p^2 = m^2,
+\ese 
+where the last line follows from our assumption that the momentum is on-shell. So the determinant gives us the mass (squared), what use is this? Well now consider the case when $m=0$. Obviously this tells us that the matrix is degenerate, which in turn tells us that $p^{\dot{\a}\a}$ has rank-$1$. This means that we can decompose $p^{\dot{\a}\a}$ as the outer product\footnote{The outer product of two matrices is simply their tensor product. For our case of 2-column vectors, $\l^{\a} = (\l^1,\l^2)^T$ and $\widetilde{\l}^{\dot{\a}} = (\widetilde{\l}^{\dot{1}},\widetilde{\l}^{\dot{2}})^T$, it is simply given by \bse 
+    \widetilde{\l}^{\dot{\a}}\otimes \l^{\a} = \begin{pmatrix}
+        \widetilde{\l}^{\dot{1}} \l^1 & \widetilde{\l}^{\dot{1}}\l^2 \\
+        \widetilde{\l}^{\dot{2}} \l^1 & \widetilde{\l}^{\dot{2}}\l^2 \\
+    \end{pmatrix}.
+\ese 
+We simply suppress the $\otimes$ in \Cref{eqn:BispinorForm} and will continue to do so throughout these notes. Hopefully it will be clear from context ($p^{\dot{\a}\a}$ is a $2\times 2$ matrix whereas the $\widetilde{\l}/\l$ are 2-column matrices) what is meant.} of two spinors:
+\mybox{
+    \be
+    \label{eqn:BispinorForm}
+        p^{\dot{\a}\a} = \widetilde{\l}^{\dot{\a}} \l^{\a}
+    \ee 
+}
+\noindent which is known as \textit{bispinor form}. 
+
+\br
+\label{rem:CommutingSpinors}
+    In these notes we will work with \textit{commuting} spinors. That is, for a given $\a/\dot{\a}$, our $\l^{\a}$ and $\widetilde{\l}^{\dot{\a}}$ are `normal', Grassman even, numbers that we can freely interchange. This is in contrast to our convention in SUSY where we had \textit{anticommuting} spinors. The reason we can do this is not trivial at this point, and will be explained later. The idea is that we split the amplitude into a commuting part and an anticommuting part. The latter part is the colour structure and is contained completely within the generators $T^a$. 
+\er 
+
+\br 
+    Note that in the above remark we said "for a given $\a/\dot{\a}$" because it is only the \textit{components} we can commute. In other words
+    \bse 
+        \l^{\a} \widetilde{\l}^{\dot{\a}} := \l^{\a} \otimes \widetilde{\l}^{\dot{\a}} \cong \widetilde{\l}^{\dot{\a}} \otimes \l^{\a} =: \widetilde{\l}^{\dot{\a}}\l^{\a},
+    \ese 
+    where $\cong$ means "isomorphic as algebras", but they are not \textit{equal}. This is easily seen by the act that $p^{\a\dot{\a}} \neq p^{\dot{\a}\a}$ using \Cref{eqn:pAlphaDotAlpha}.
+\er 
+
+\bbox 
+    Let 
+    \bse 
+        \l^{\a} = \frac{1}{\sqrt{p^0+p^3}} \begin{pmatrix}
+            p^0 + p^3 \\
+            p^1 - ip^2
+        \end{pmatrix}, \qand \widetilde{\l}^{\dot{\a}} = \frac{1}{\sqrt{p^0+p^3}} \begin{pmatrix}
+            p^0 + p^3 \\
+            p^1 + ip^2
+        \end{pmatrix}.
+    \ese 
+    Show that 
+    \bse 
+        p^{\dot{\a}\a} := \widetilde{\l}^{\dot{\a}} \l^{\a} = (\bar{\sig})^{\dot{\a}\a}_{\mu} p^{\mu} = \begin{pmatrix}
+            p^0 + p^3 & p^1 - ip^2 \\
+            p^1 + ip^2 & p^0 - p^3
+        \end{pmatrix}.
+    \ese 
+    This gives confirmation that \Cref{eqn:BispinorForm} and \Cref{eqn:pAlphaDotAlpha} agree.
+\ebox 
+
+If the momentum is real, then of course \Cref{eqn:BispinorForm} puts constraints on our $\widetilde{\l}/\l$s, in particular $\widetilde{\l} = \l^*$, up to some real phase (i.e. a factor 2 etc). However if $p\in\C$ then the $\widetilde{\l}$ and $\l$ are independent, this trick will be important later. You might make the argument that this is non-physical, which is true, however we will forget about this for calculational purposes. Namely we want to think of the $\l$s independently and then \textit{at the end} we will impose a reality condition.\footnote{This is an example of where we have injected a bit of twistor theory to motivate our calculations. The complex momentum comes from the fact that we consider complexified Minkowski spacetime and the momentum is given by derivatives w.r.t. the coordinates, which are now complex.} 
+
+Note that this decomposition is far from unique. For example if we took 
+\bse 
+    \l \to e^{i\phi}\l \qand \widetilde{\l}\to e^{-i\phi} \widetilde{\l} 
+\ese 
+then $p$ is unchanged. This rescalling freedom is generated by a $U(1)$ generator, known as \textit{helicity}.\footnote{Its an example of a \textit{little group}.} Explicitly we have 
+\be 
+\label{eqn:HelicityOperator}
+    h = -\frac{1}{2}\bigg(-\l^{\a}\frac{\p}{\p \l^{\a}} +\widetilde{\l}^{\dot{\a}}\frac{\p}{\p\widetilde{\l}^{\dot{\a}}}\bigg),
+\ee 
+which obeys 
+\mybox{
+    \be 
+    \label{eqn:HelicityOfLambdas}
+        h\l = -\frac{1}{2}\l \qand h\widetilde{\l} = \frac{1}{2}\widetilde{\l},
+    \ee 
+}
+\noindent so undotted spinnors have helicity $-1/2$ and the dotted spinors have helicity $+1/2$. This basically describes a rotation in the plane orthogonal to the propagation direction; the $U(1)$ group generated by helicity corresponds to rotation in the 2-plane orthogonal to the \textit{spatial} momentum.\footnote{Note that it is $U(1)$ because we're working in 4d. That is the plane orthogonal to the spatial momentum is a 2-plane and so we just have a single angle and so it is abelian. In higher dimensions we have a 3-plane etc.}
+
+We can raise/lower the indices using the Levi-Civita tensor 
+\bse 
+    \l_{\a} = \epsilon_{\a\beta}\l^{\beta} \qand \widetilde{\l}_{\dot{\a}} = \epsilon_{\dot{\a}\dot{\beta}}\widetilde{\l}^{\dot{\beta}}
+\ese 
+with
+\be 
+\label{eqn:LeviCivitaTensor}
+    \epsilon_{\a\beta} = \epsilon_{\dot{\a}\dot{\beta}} = \begin{pmatrix}
+        0 & -1 \\
+        1 & 0
+    \end{pmatrix}
+\ee 
+Note when you invert it you get a minus sign, namely 
+\bse 
+    \epsilon^{\a\beta} = \epsilon^{\dot{\a}\dot{\beta}} = \begin{pmatrix}
+        0 & 1 \\
+        -1 & 0
+    \end{pmatrix}
+\ese 
+so that we have 
+\bse 
+    \epsilon_{\a\beta}\epsilon^{\beta\g} = \del^{\g}_{\a}. 
+\ese 
+and similarly for the dotted indices. From this we have the trivial self consistency check 
+\bse 
+    \l^{\a} = \epsilon^{\a\beta}\l_{\beta} = \epsilon^{\a\beta} \epsilon_{\beta\g} \l^{\g} = \del^{\a}_{\g}\l^{\g} = \l^{\a}.
+\ese 
+
+\br 
+    For complete clarity, it only makes sense to contract an undotted index with an undotted one, and similarly dotted with dotted. That is we shouldn't be tricked by the equal signs in \Cref{eqn:LeviCivitaTensor} and multiply $\epsilon_{\a\beta}$ by $\epsilon^{\dot{\beta}\dot{\g}}$ and try contract the $\beta$ with $\dot{\beta}$ to get the identity matrix. In other words, the equal sign between $\epsilon_{\a\beta}$ and $\epsilon_{\dot{\a}\dot{\beta}}$ is mathematical none-sense: the two objects live in different spaces (the two $SU(2)$s) and so there is no notion of equality between them. This is probably a rather pedantic remark, but it is important to be clear on. 
+\er
+
+The idea of raising indices naturally allows us to define inner products on our two spaces.\footnote{In other words the Levi-Civita tensors are essentially giving us a map to the dual space, which can be used to define an inner product.} With the above remark in mind, it's important not to confuse the two separate inner products --- one for the undotted $SU(2)$ and one for the dotted $SU(2)$ --- and so we adopt the standard notation
+\mybox{
+    \be 
+    \label{eqn:InnerProdcuts}
+        \la i j \ra := \l_i^{\a}\l_{j\a} \qand [ij] := \widetilde{\l}_{i\dot{\a}}\widetilde{\l}_j^{\dot{\a}}, 
+    \ee 
+}
+\noindent where the $i,j$ label which particle we're talking about (i.e. they label the momenta $p_i$). 
+
+Recalling \Cref{rem:CommutingSpinors}, i.e. we are working with commuting spinors, we see that our inner products are antisymmetric:
+\bse 
+    \la i j \ra = - \la j i \ra \qand [ij] = - [ji]. 
+\ese 
+In particular it tells us that the inner product of a spinor with itself vanishes $\la ii \ra = 0 = [ ii ]$. This fact will be of great use to us in what follows and will allow us to drop a lot of terms. 
+
+We have 
+\bse 
+	p_{\a\dot{\a}} = \epsilon_{\a\beta}\epsilon_{\dot{\a}\dot{\beta}}  p^{\dot{\beta}\beta} =  \l_{\a} \widetilde{\l}_{\dot{\a}}
+\ese 
+However we also have 
+\bse 
+    \epsilon_{\a\beta}\epsilon_{\dot{\a}\dot{\beta}}  p^{\dot{\beta}\beta} = \epsilon_{\a\beta}\epsilon_{\dot{\a}\dot{\beta}}  p_{\mu}(\bar{\sig}^{\mu})^{\dot{\a}\a} = p_{\mu} (\sig^{\mu})_{\a\dot{\a}} 
+\ese 
+where
+\bse 
+    (\sig^{\mu})_{\a\dot{\a}} = \epsilon_{\a\beta}\epsilon_{\dot{\a}\dot{\beta}} (\bar{\sig}^{\mu})^{\dot{\beta}\beta} = (\b1, \vec{\sig}). 
+\ese 
+which just gives us \Cref{eqn:pAlphaDotAlpha}.
+
+\br 
+    Note that when we use the Levi-Civita tensor to lower a combination of $\dot{\a}\a$ the order switches. That is we have $p^{\dot{\a}\a}$ with the dotted first but $p_{\a\dot{\a}}$ with the undotted first, and similarly for the $(\bar{\sig}^{\mu})^{\dot{\a}\a}$ and $(\sig^{\mu})_{\a\dot{\a}}$. 
+\er 
+
+Now consider the following
+\bse 
+    (p_i)_{\a\dot{\a}} (p_j)^{\dot{\a}\a} = \l_{i\a} \widetilde{\l}_{i\dot{\a}} \widetilde{\l}_j^{\dot{\a}}\l_j^{\a} = \la j i \ra [ij] = - \la i j \ra [ij],
+\ese 
+where again the $i,j$ label which particle we are talking about (i.e. they are not spatial components of the momenta). Now we can also write this in terms of the Pauli matrices 
+\bse 
+    \begin{split}
+        p_i^{\mu}p_j^{\nu} (\sig_{\mu})_{\a\dot{\a}} (\bar{\sig}_{\nu})^{\dot{\a}\a} & = p_i^{\mu}p_j^{\nu}  \Tr[\sig_{\mu}\bar{\sig}_{\nu}] \\
+        & = p_i^{\mu}p_j^{\nu} 2 \eta_{\mu\nu} \\
+        & = 2p_i\cdot p_j \\
+        & = (p_i+p_j)^2,
+    \end{split}
+\ese 
+where we have used 
+\bse 
+    \Tr[\sig_{\mu}\bar{\sig}_{\nu}] = 2\eta_{\mu\nu},
+\ese 
+and where the last line follows from the fact that our momenta are null, $p_i^2=0=p_j^2$. Equating these two quantities gives us a very important formula:
+\mybox{
+    \be 
+    \label{eqn:MomentumToInnerProducts}
+        (p_i+p_j)^2 = 2p_i\cdot p_j = - \la ij \ra [ij]. 
+    \ee 
+}
+
+To recap: essentially what \Cref{eqn:MomentumToInnerProducts} allows us to do is replace the kinematics (i.e. the momenta) of our null particles with inner products of spinor indices. This takes us part way to our stated at the beginning of this chapter. It is only part way as we still need to express the polarisations in terms of our spinors.
+
+\section{Polarisations}
+
+Polarisations of external particles are obtained from solutions to the classical equation of motion in the free theory. Let's start by considering the massless free Dirac Lagrangian\footnote{This is because the scalar fields don't have polarisations so the first starting point is spin-$1/2$.}
+\bse 
+    \cL = i \bar{\psi} \g^{\mu}\p_{\mu}\psi \qquad \bar{\psi} := \psi^{\dagger}\g^0,
+\ese 
+with 
+\be 
+\label{eqn:GammaMatrices}
+    \g^{\mu} = \begin{pmatrix}
+        0 & \sig^{\mu} \\
+        \bar{\sig}^{\mu} & 0 
+    \end{pmatrix}.
+\ee 
+The equations of motion of course the Dirac equation
+\bse 
+    i\g^{\mu} \p_{\mu} \psi = 0.
+\ese 
+Now consider a solution of the plane-wave form, namely 
+\bse 
+    \psi(x) = \begin{pmatrix}
+        \chi_{\a}(p) \\
+        \widetilde{\chi}^{\dot{\a}}(p)
+    \end{pmatrix}  e^{ipx}.
+\ese 
+Plugging this into the Dirac equation gives us 
+\bse 
+    \g^{\mu}p_{\mu}\begin{pmatrix}
+        \chi_{\a}(p) \\
+        \widetilde{\chi}^{\dot{\a}}(p)
+    \end{pmatrix} = 0 
+\ese 
+which with \Cref{eqn:GammaMatrices} reduces to
+\bse 
+    p_{\mu}\sig^{\mu}\widetilde{\chi} = 0 \qand p_{\mu}\bar{\sig}^{\mu} \chi = 0.
+\ese
+
+We now employ the work from the previous section and  write this in terms of spinors via
+\bse 
+    p_{\mu}(\sig^{\mu})_{\a\dot{\a}} = \l_{\a}\widetilde{\l}_{\dot{\a}} \qand p_{\mu} (\bar{\sig})^{\dot{\a}\a} = \widetilde{\l}^{\dot{\a}} \l^{\a}.
+\ese 
+From this, and the fact that our inner products are antisymmetric, we see that 
+\bse 
+    \chi_{\a} = \l_{\a} \qand \widetilde{\chi}^{\dot{\a}} = \widetilde{\l}^{\dot{\a}}
+\ese 
+is a valid solution (i.e. because $\l^{\a}\l_{\a}= 0 = \widetilde{\l}_{\dot{\a}}\widetilde{\l}^{\dot{\a}}$), then by standard uniqueness theorems we know this is the only solution. This motivates the following definitions. 
+\mybox{
+    \be 
+    \label{eqn:Kets}
+        \ket{p} := \begin{pmatrix}
+            \l_{\a} \\
+            0
+        \end{pmatrix} \qand |p] := \begin{pmatrix}
+            0 \\ 
+            \widetilde{\l}^{\dot{\a}}
+        \end{pmatrix}
+    \ee 
+    and 
+    \be
+    \label{eqn:Bras}
+        \bra{p} := \begin{pmatrix}
+            \l^{\a} & 0
+        \end{pmatrix} \qand [p| := \begin{pmatrix}
+            0 & \widetilde{\l}_{\dot{\a}}
+        \end{pmatrix}
+    \ee 
+}
+\noindent where the second set solve the equations of motion for $\bar{\psi}$, namely $\bar{\psi}\g^{\mu}p_{\mu}=0$. Note the placement of the $\a/\dot{\a}$ indices in \Cref{eqn:Kets,eqn:Bras}.
+
+We take all the particles to be outgoing and make the following definitions 
+
+\begin{center}
+	\begin{tabular}{@{} C{4cm} C{4cm} C{4cm} @{}}
+		\toprule
+		Helicity & $+1/2$ & $-1/2$ \\ \\
+		Quark & $[p|$ & $\bra{p}$ \\ \\
+		Anti-Quark & $|p]$ & $\ket{p}$ \\
+		\bottomrule
+	\end{tabular}
+\end{center}
+so that the solution $[p|$ describes an outgoing quark with helicity $+1/2$, etc. If the momentum is physically \textit{ingoing} then we just make the substitution $p_{\mu} \to -p_{\mu}$ and $h\to - h$.
+
+So we have a way to categorise the solutions to the free equations of motion in terms of the spinors. We therefore can express the polarisations in terms of the spinors which is exactly the goal we wanted to achieve. This was for spin-$1/2$ particles, i.e. Fermions, but the main focus of this course will be on spin-$1$ particles, Bosons, which we now discuss. 
+
+\section{Spin-1}
+
+As we just said, spin-$1$ particles correspond to Bosons, and in the standard model these in turn correspond to our propagators, e.g. the photon and gluons. Our main focus will be on gluons (and therefore QCD), with comments to other particles made.
+
+\subsection{Abelian (QED)}
+
+As always it is instructive to start off by discussion the abelian case, namely electrodynamics. We have the classical Maxwell action
+\bse
+    \cL = -\frac{1}{4}F_{\mu\nu}F^{\mu\nu} \qquad F_{\mu\nu} := \p_{\mu}A_{\nu} - \p_{\nu}A_{\mu}. 
+\ese 
+As we know from previous courses, this admits a gauge symmetry 
+\bse 
+    A_{\mu} \to A_{\mu} + \p_{\mu}\Lambda
+\ese 
+which can easily be used to show that $F_{\mu\nu}$ itself is invariant. We can use this freedom to impose \textit{Lorenz gauge}
+\be
+\label{eqn:LorenzGauge}
+    \p_{\mu}A^{\mu} = 0.
+\ee
+In this guage, the equations of motion simplify to
+\bse 
+    0 = \p_{\mu}F^{\mu\nu} = \p_{\mu}\big(\p^{\mu}A^{\nu} - \p^{\nu}A^{\mu}\big) = \p^2 A^{\nu},
+\ese 
+which is just the wave equation 
+\bse 
+    \big(\p_t^2 - \nabla^2)A^{\nu} = 0.
+\ese 
+We now go to momentum space and again assume that $A_{\mu}(x)$ has a single plane wave solution 
+\bse 
+    A_{\mu}(x) = \epsilon_{\mu}(p) e^{ipx}. 
+\ese 
+Then our conditions above imply 
+\bse 
+    p^2 = 0 \qand \epsilon\cdot p = 0.
+\ese 
+where the second one comes from \Cref{eqn:LorenzGauge}. There is still some residual gauge freedom, however, notably 
+\bse 
+    A_{\mu} \to A_{\mu} + \p_{\mu}\omega \qquad \text{provided} \qquad \p^2 \omega = 0. 
+\ese 
+In momentum space this is 
+\bse 
+    \omega(x) = \a(p) e^{ipx} \qquad \implies \qquad p^2=0,
+\ese 
+then plugging this in above, we have 
+\bse 
+    \epsilon_{\mu}(p) \to \epsilon_{\mu}(p) + i \a(p) p_{\mu}
+\ese
+In other words $\epsilon$ and $\epsilon + i\a p$ are \textit{physically} equivalent. 
+
+Let's choose a frame where the momentum points in the $z$ direction. 
+\bse 
+    p^{\mu} = (E,0,0,E)
+\ese 
+from which it follows that
+\bse 
+    \epsilon\cdot p = 0 \qquad \implies \qquad \epsilon^{\mu}=(0,b,c,0) + a(1,0,0,1).
+\ese 
+Then using our residual gauge freedom we can use
+\bse
+    \epsilon^{\mu} \to \epsilon^{\mu} - \frac{a}{E}p^{\mu} = (0,b,c,0).
+\ese 
+Finally imposing normalisation etc, we get the following basis for the polarisations
+\mybox{
+    \be
+    \label{eqn:EpsilonPlusMinus}
+        \epsilon_{\pm}^{\mu} = \frac{1}{\sqrt{2}} (0,1,\pm i, 0).
+    \ee
+}
+
+Let's make some comments. The polarisation vectors are:
+\ben[label=(\roman*)] 
+    \item Complex conjugate related: $\epsilon_+= (\epsilon_-)^*$,
+    \item Null: $\epsilon_+\cdot\epsilon_+ = 0 = \epsilon_-\cdot\epsilon_-$,
+    \item Their inner product is $\epsilon_+\cdot \epsilon_- = -1$.
+\een 
+The key point is the second one because it tells us that our polarisation vectors are null, and so we can write them in terms of our spinors. We define
+\mybox{
+    \be 
+    \label{eqn:PolarisationsAsSpinors}
+        \begin{split}
+            \epsilon_+^{\dot{\a}\a} := \epsilon_+^{\mu}(\bar{\sig}_{\mu})^{\dot{\a}\a} = -\sqrt{2} \frac{\widetilde{\l}^{\dot{\a}}\mu^{\a} }{\la \l\mu \ra } \\
+            \epsilon_-^{\dot{\a}\a} := \epsilon_-^{\mu}(\bar{\sig}_{\mu})^{\dot{\a}\a} = \sqrt{2} \frac{\l^{\a}\widetilde{\mu}^{\dot{\a}} }{[\widetilde{\l}\widetilde{\mu}] }
+        \end{split}
+    \ee 
+}
+\noindent where $p^{\dot{\a}\a} = \widetilde{\l}^{\dot{\a}} \l^{\a}$ and $q^{\dot{\a}\a} = \widetilde{\mu}^{\dot{\a}}\mu^{\a}$ is a reference momentum that encodes the residual gauge symmetry. We will prove this in just a moment. First let's check that these give us the desired properties. We have 
+\bse 
+    (\epsilon_+)^{\dot{\a}\a} (\epsilon_+)_{\a\dot{\a}} \sim [\widetilde{\l}\widetilde{\l}] = 0 \qand (\epsilon_-)^{\dot{\a}\a} (\epsilon_-)_{\a\dot{\a}}  \sim \la \l \l \ra = 0,
+\ese
+which is condition (ii). 
+
+Next we have
+\bse 
+    (\epsilon_+)^{\dot{\a}\a}(\epsilon_-)_{\a\dot{\a}} = -2 \frac{[\widetilde{\mu}\widetilde{\l}]\la \mu\l\ra }{\la \l \mu \ra [\widetilde{\l}\widetilde{\mu}]} = -2.
+\ese 
+which seems wrong at first (we want $-1$ not $-2$) but then we remember that the $-1$ condition comes from the Lorentz expressions. As we see from \Cref{eqn:MomentumToInnerProducts} the two are related by a factor of $2$, i.e.
+\be
+\label{eqn:LorentzToSpinorContraction}
+    2 \epsilon_+\cdot\epsilon_- = (\epsilon_+)^{\dot{\a}\a}(\epsilon_-)_{\a\dot{\a}},
+\ee 
+and so we get the right-hand side inner product being $-1$. 
+
+We also want to check that our gauge condition $\epsilon\cdot p =0$ is preserved. This follows easily from 
+\bse
+    \epsilon_+^{\dot{\a}\a} p_{\dot{\a}\a} \sim [\widetilde{\l}\widetilde{\l}] = 0 \qand \epsilon_-^{\dot{\a}\a} p_{\dot{\a}\a} \sim \la \l \l \ra = 0.
+\ese 
+Equally we can check the helicity, using \Cref{eqn:HelicityOperator} we can easily obtain
+\bse 
+    h \epsilon_{\pm} = \pm \epsilon_{\pm},
+\ese 
+which is where the subscript came from in the first place. 
+
+Finally we want to show that $\mu$ does indeed encode the residual gauge symmetry. We consider a variation of $\mu$ and compute how $\epsilon$s change. 
+\bse 
+    \mu \to \mu + a \mu + b \l  = (1+a)\mu + b\l,
+\ese 
+where we have used that we can use $\mu$ and $\l$ as a basis of two component objects, which is fine as we have already assumed $\mu$ and $\l$ are not proportional. So how does $\epsilon$ change? We have (using $\la \l \l \ra = 0$)
+\bse
+    \begin{split}
+        (\epsilon_+)^{\dot{\a}\a} &\to -\sqrt{2} \frac{ \widetilde{\l}^{\dot{\a}} \big((1+a)\mu^{\a} + b\l^{\a}\big) }{\la \l, (1+a)\mu + b\l \ra} \\
+        & = -\sqrt{2} \frac{\widetilde{\l}^{\dot{\a}}\mu^{\a} }{\la \l \mu\ra} - \frac{\sqrt{2}b}{1+a}\frac{\widetilde{\l}^{\dot{\a}} \l^{\a} }{\la \l \mu\ra} \\
+        & = (\epsilon_+)^{\dot{\a}\a} - \frac{\sqrt{2}b}{(1+a)\la \l \mu \ra} p^{\dot{\a}\a},
+    \end{split}
+\ese 
+which is just a residual gauge transformation, i.e. $(\epsilon_+)^{\dot{\a}\a}$ has changed by something proportional to $p$. A similar calculation will give the $(\epsilon_-)^{\dot{\a}\a}$ result.
+

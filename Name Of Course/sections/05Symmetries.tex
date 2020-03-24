@@ -1,0 +1,345 @@
+\chapter{Symmetries Of Amplitudes}
+
+As we have seen, scattering amplitudes have tremendous mathematical simplicity. As we explained at the beginning of the course, very often this is because of underlying symmetries which are sometimes hidden from the point of view of the action and standard Feynman diagram techniques. For the rest of the course, we will explore the conformal symmetries of tree-level Yang-Mills amplitudes and their SUSY extension. We will then introduce twistors and briefly describe how they can be used to realise Yangian symmetry of $\cN=4$ SYM and formulate a worldsheet description. 
+
+\section{Review Of Conformal Group}
+
+As we have an entire course on CFT, this is just a brief section to recap the relevant information needed here. 
+
+The generators of the conformal group are 
+\ben[label=(\roman*)] 
+    \item Poincar\'{e}
+        \ben 
+            \item Translations:
+            \bse 
+                P_{\mu} = -i \frac{\p}{\p x^{\mu}}.
+            \ese 
+            \item Lorentz:
+            \bse 
+                M_{\mu\nu} = i\bigg(x_{\mu}\frac{\p}{\p x^{\nu}} - x_{\nu}\frac{\p}{\p x^{\mu}}\bigg).
+            \ese 
+        \een 
+    \item Dilatations:
+    \bse 
+        D = -ix^{\mu}\frac{\p}{\p x^{\mu}}.
+    \ese
+    \item Special Conformal:
+    \bse 
+        K_{\mu} = i\bigg( x^2 \frac{\p}{\p x^{\mu}} - 2x_{\mu} x^{\nu}\frac{\p}{\p x^{\nu}} \bigg)
+    \ese 
+    The special conformal transformations are related to the translations by the inversion operator,
+    \bse 
+        I(x^{\mu}) = \frac{x^{\mu}}{x^2},
+    \ese 
+    simply as $K_{\mu} = IP_{\mu}I$.
+\een 
+
+\section{$4D$ SYM}
+
+In 4D Minkowski spacetime, these generate $SO(2,4)$. $4D$ SYM theory has no dimensionful parameters, and therefore enjoys classical conformal symmetry, which is broken quantum mechanically. Quantum mechanics enters at loop level, so we expect the tree-level amplitudes to be conformally invariant for $4D$ SYM. 
+
+\subsection{Generators In Spinor Form}
+
+How is this symmetry realised for amplitudes? Well, in principal, this can be deduced by Fourier transforming the generators to momentum space and changing to spinor variables by the prescriptions above. However very little is gained from this calculation, and so here we simply write our the generators in spinor form and verify that they annihilate MHV amplitudes. Given the spinor form, it is not difficult to verify that they obey the conformal algebra relations (i.e. the commutator relations). 
+
+\ben[label=(\roman*)] 
+    \item Translations: 
+    \be 
+    \label{eqn:Translations}
+        p^{\dot{\a}\a} = \widetilde{\l}^{\dot{\a}}\l^{\a}.
+    \ee 
+    \item Lorentz:
+    \be 
+    \label{eqn:Lorentz}
+        m_{\a\beta} = \l_{(\a} \frac{\p}{\p \l^{\beta)}} \qand \widetilde{m}_{\dot{\a}\dot{\beta}} = \widetilde{\l}_{(\dot{\a}} \frac{\p}{\p \widetilde{\l}^{\dot{\beta})}},
+    \ee 
+    where the brackets indicate index symmetrisation. 
+    \item Dilatations:
+    \be 
+    \label{eqn:Dilatations}
+        d = \frac{1}{2} \l^{\a} \frac{\p}{\p \l^{\a}} + \widetilde{\l}^{\dot{\a}}\frac{\p}{\p \widetilde{\l}^{\dot{\a}}} + \b1. 
+    \ee 
+    \item Special Conformal:
+    \be 
+    \label{eqn:SpecialConformal}
+        k_{\a\dot{\a}} = \frac{\p}{\p \l^{\a} \widetilde{\l}^{\dot{\a}}}.
+    \ee 
+\een 
+
+Let's verify that they annihilate the tree-level MHV amplitudes 
+\bse 
+    A_n^{\text{MHV}} \equiv A(1^+,..., i^-,...,j^-,...,n^+) = \del^4\bigg(\sum_{i=1}^n p_i \bigg) \frac{\la ij \ra}{\la 12\ra ... \la n 1\ra }
+\ese 
+where the delta function imposes momentum conservation. We put this in as we can then treat the spinor variables in the rest of the expression as independent variables. We will use
+\bse 
+    p := \sum_{i=1}^n p_i
+\ese 
+to lighten notation. The full symmetry generators are obtained by defining the above generators for each external leg and then summing them all up. 
+
+\ben[label=(\roman*)]
+    \item Translations: these are trivial as we simply get
+    \bse 
+        \bigg(\sum_{i=1}^n p_i\bigg) \del^4(p) = p \del^4(p) = 0.
+    \ese    
+    \item Lorentz: this follows from the invariance of $\la jk \ra$ and $[jk]$, 
+    \bse 
+        \begin{split}
+            \sum_{i=1}^n m_{i,\a\beta} \la jk \ra & = \sum_{i=1}^n \l_{i(\a} \frac{\p}{\p \l_i^{\beta)}} \l_j^{\g}\l_{k\g} \\
+            & = \frac{1}{2}\big(\l_{j\a} \del^{\g}_{\beta} \l_{k\g} + \l_{j}^{\g} \l_{k\a} \epsilon_{\g\beta}\big) + (\a \leftrightarrow \beta) \\
+            & = \frac{1}{2}\big( \l_{j\a} \l_{k\beta} - \l_{j\beta} \l_{k\a}\big) + (\a \leftrightarrow \beta) \\
+            & = 0,
+        \end{split}
+    \ese 
+    and then similarly for the $\sum\widetilde{m}_{i,\dot{\a}\dot{\beta}}[jk]$ calculation.
+    \item Dilations: First note that 
+    \bse 
+        \sum_{i=1}^n\frac{1}{2} \l^{\a} \frac{\p}{\p \l^{\a}} + \widetilde{\l}^{\dot{\a}}\frac{\p}{\p \widetilde{\l}^{\dot{\a}}} 
+    \ese 
+    just counts mass dimension. So from 
+    \bse 
+        \big[\del^4(p)\big] = -4, \qquad \big[\la ij\ra \big] = 4 \qand \big[ \big(\la 12 \ra ... \la n1 \ra\big)^{-1} \big] = -n
+    \ese 
+    and 
+    \bse 
+        \sum_{i=1}^n \b1 = n,
+    \ese 
+    we have 
+    \bse 
+        d A_n^{\text{MHV}} = (-4+4-n)A_n^{\text{MHV}} + nA_n^{\text{MHV}} = 0. 
+    \ese 
+    \item Special Conformal: this take a bit more work. First let's introduct that notation 
+    \bse 
+        \widetilde{A}_n^{\text{MHV}} := \frac{\la ij \ra}{\la 12\ra ... \la n 1\ra } \qquad \implies \qquad A_n^{\text{MHV}} = \del^4(p) \widetilde{A}_n^{\text{MHV}}.
+    \ese
+    Then, noting 
+    \bse 
+        \frac{\p \widetilde{A}_n^{\text{MHV}}}{\p \widetilde{\l}_i^{\dot{\a}}} = 0,
+    \ese 
+    we have 
+    \bse 
+        \begin{split}
+            \sum_{i=1}^n k_{i,\a\dot{\a}} A_n^{\text{MHV}} & = \sum_{i=1}^n \frac{\p}{\p \l_i^{\a} \widetilde{\l}_i^{\dot{\a}}} \Big[ \del^4(p) \widetilde{A}_n^{\text{MHV}}\Big] \\
+            & = \sum_{i=1}^n \frac{\p}{\p \l_i^{\a}} \bigg[ \frac{\p p^{\dot{\beta}\beta}}{\p \widetilde{\l}_i^{\dot{\a}}} \frac{\p \del^4(p)}{\p p^{\dot{\beta}\beta}} \widetilde{A}_n^{\text{MHV}}\bigg] \\
+            & = \sum_{i=1}^n \frac{\p}{\p \l_i^{\a}} \bigg[ \l_i^{\beta} \del^{\dot{\beta}}_{\dot{\a}} \frac{\p \del^4(p)}{\p p^{\dot{\beta}\beta}} \widetilde{A}_n^{\text{MHV}}\bigg] \\
+            & = \sum_{i=1}^n \bigg[ \del^{\beta}_{\a} \del^{\dot{\beta}}_{\dot{\a}} \frac{\p \del^4(p)}{\p p^{\dot{\beta}\beta}} \widetilde{A}_n^{\text{MHV}} + \l_i^{\beta} \del^{\dot{\beta}}_{\dot{\a}} \widetilde{\l}_i^{\dot{\g}} \del^{\g}_{\a} \frac{\p^2 \del^4(p)}{\p p^{\dot{\g}\g} \p p^{\dot{\beta}\beta}} \widetilde{A}_n^{\text{MHV}} + \l_i^{\beta} \del^{\dot{\beta}}_{\dot{\a}} \frac{\p \del^4(p)}{\p p^{\dot{\beta}\beta}} \frac{\p \widetilde{A}_n^{\text{MHV}}}{\p \l_i^{\a}} \bigg] \\
+            & = \bigg[ n \del^{\beta}_{\a} \del^{\dot{\beta}}_{\dot{\a}} \frac{\p \del^4(p)}{\p p^{\dot{\beta}\beta}}  + p^{\dot{\beta}\beta} \frac{\p^2 \del^4(p)}{\p p^{\dot{\a}\beta} \p p^{\dot{\beta}\a}}\bigg] \widetilde{A}_n^{\text{MHV}} + \frac{\p \del^4(p)}{\p p^{\dot{\a}\beta}} \sum_{i=1}^n \l_i^{\beta} \frac{\p \widetilde{A}_n^{\text{MHV}}}{\p \l_i^{\a}}.
+        \end{split}
+    \ese 
+    This looks like a horrible mess, but now we note that 
+    \bse 
+        \l_{\beta} \frac{\p}{\p \l^{\a}} = \l_{(\beta} \frac{\p}{\p \l^{\a)}} + \l_{[\beta} \frac{\p}{\p \l^{\a]}} = m_{\a\beta} + \frac{1}{2} \epsilon_{\beta\a} \l^{\g} \frac{\p}{\p \l^{\g}}, 
+    \ese 
+    so the last term in the expression above simply gives 
+    \bse 
+        \frac{\p \del^4(p)}{\p p^{\dot{\a}\beta}} \sum_{i=1}^n \l_i^{\beta} \frac{\p \widetilde{A}_n^{\text{MHV}}}{\p \l_i^{\a}} = \frac{\p \del^4(p)}{\p p^{\dot{a}\beta}} \sum_{i=1}^n \bigg( {m^{\beta}}_{\a} + \frac{1}{2}\del^{\beta}_{\a} \l_i^{\g}\frac{\p}{\p \l_i^{\g}}\bigg) A_n^{\text{MHV}} = (4-n) \frac{\p \del^4(p)}{\p p^{\dot{\a}\beta}} A_n^{\text{MHV}},
+    \ese 
+    where we have used that the Lorentz generators annihilate $A_n^{\text{MHV}}$ and that the derivative term will just give the weight, $(4-n)$, as in the dilatation calculation. 
+    
+    So in total we are left with 
+    \bse 
+        \sum_{i=1}^n k_{i,\dot{\a}\a} A_n^{\text{MHV}} = \bigg[ 4 \frac{\p \del^4(p)}{\p p^{\dot{\a}\a}}  + p^{\dot{\beta}\beta} \frac{\p^2 \del^4(p)}{\p p^{\dot{\beta}\a} \p p^{\dot{\a}\beta}}\bigg]\widetilde{A}_n^{\text{MHV}}.
+    \ese
+    The claim is now that 
+    \bse 
+        p^{\dot{\beta}\beta} \frac{\p^2 \del^4(p)}{\p p^{\dot{\beta}\a} \p p^{\dot{\a}\beta}} = -4 \frac{\p \del^4(p)}{\p p^{\dot{\a}\a}}.
+    \ese 
+    We can verify this by integrating against a test function:
+    \bse 
+        \begin{split}
+            \int d^4p \, F(p) p^{\dot{\beta}\beta} \frac{\p^2 \del^4(p)}{\p p^{\dot{\beta}\a} \p p^{\dot{\a}\beta}} & = - \int d^4p \, \bigg( \frac{\p F}{\p p^{\dot{\beta}\a}} p^{\dot{\beta}\beta} + F 2\del^{\beta}_{\a}\bigg) \frac{\p \del^4(p)}{\p p^{\dot{\a}\beta}} \\
+            & = \int d^4p \, \bigg( \frac{\p^2 F}{\p p^{\dot{\a}\beta} \p p^{\dot{\beta}\a}}p^{\dot{\beta}\beta} + \frac{\p F}{\p p^{\dot{\beta}\a}} 2\del^{\dot{\beta}}_{\dot{\a}} + \frac{\p F}{\p p^{\dot{\a}\beta}} 2\del^{\beta}_{\a} \bigg)\del^4(p) \\
+            & = 4 \int d^4p \, \frac{\p F}{\p p^{\dot{\a}\a}} \del^4(p) \\
+            & = -4 \int d^4p \, F(p) \frac{\p \del^4(p)}{\p p^{\dot{\a}\a}},
+        \end{split}
+    \ese 
+    and so we have 
+    \bse 
+        \sum_{i=1}^n k_{i,\a\dot{\a}} A_n^{\text{MHV}} = 0. 
+    \ese
+\een 
+
+So we have shown that our given conformal symmetry generators annihilate the MHV tree-level amplitudes. 
+
+\subsection{SUSY}
+
+It's possible to extend the conformal group by introducing Grassman-odd variables, $\eta^A$, and defining the new generators
+\be 
+\label{eqn:SUSYqsDefinitions}
+    \begin{split}
+        q^{\a A} & := \l^{\a} \eta^A, \\
+        \widetilde{q}^{\dot{\a}}_{A} &:= \widetilde{\l}^{\dot{\a}} \frac{\p}{\p\eta^A}, \\
+        s_{\a A} & := \frac{\p}{\p \l^{\a}} \frac{\p }{\p\eta^A} \\
+        \widetilde{s}_{\dot{\a}}^A & := \eta^{A} \frac{\p}{\p \widetilde{\l}^{\dot{\a}}} 
+    \end{split}
+\ee 
+These generators obey 
+\be 
+\label{eqn:qsAnticommutators}
+    \{ q^{\a A}, \widetilde{q}^{\dot{\a}}_B \} = \del^A_B p^{\dot{\a}\a} \qand \{ s_{\a A}, \widetilde{s}_{\dot{\a}}^{B} \} = \del^B_A k_{\a\dot{\a}} 
+\ee 
+
+\bbox 
+    Verify \Cref{eqn:qsAnticommutators} hold.  
+\ebox 
+
+The range of $A$ corresponds to the amount of SUSY.\footnote{See the SUSY course for more on this.} For example if we want to describe $\cN=4$ SYM, $A=1,2,3,4$, which is the maximally symmetric YM theory in 4$D$.
+
+In contrast to the fact that conformal symmetry is broken quantum mechanically in pure YM, superconformal symmetry in $\cN=4$ SYM persists in the quantum theory. Due to its high degree of symmetry, many quantities in $\cN=4$ SYM can be analytically computer to high, and in some cases arbitrary, order in coupling. In that sense, $\cN=4$ SYM can be thought of as a toy model for QCD. For this reason we will focus on the case of $\cN=4$ SYM for the remainder of this course. 
+
+In addition to the SUSY generators, \Cref{eqn:SUSYqsDefinitions}, the superconformal group also has $R$-symmetry generators, 
+\be 
+\label{eqn:RGenerator}
+    {r^A}_B := \eta^{A} \frac{\p}{\p \eta^B} - \frac{1}{4} \del^A_B \eta^C \frac{\p}{\p \eta^C},
+\ee 
+which generate $SU(4)$ rotations in the $\eta^A$ space. We summarise the the superconformal generators in the following table, also listing their mass dimension (or equivalently their dilatation weight)
+
+\mybox{
+    \begin{center}
+    	\begin{tabular}{@{} C{4cm} C{4cm} C{4cm} @{}}
+    		\toprule
+    		Name & Symbol & Mass Dimension \\ 
+    		\midrule
+    		Translations & $p^{\dot{\a}\a}$ & $1$ \\ \\
+    		SuperPoincar\'{e} & $q^{\a A}$ and $\widetilde{q}^{\dot{\a}}_A$ & $1/2$ \\ \\
+    		Lorentz & $m_{\a\beta}$ and $\widetilde{m}_{\dot{\a}\dot{\beta}}$ & $0$ \\ \\
+    		Dilatations & $d$ & $0$ \\ \\
+    		R & ${r^A}_B$ & 0 \\ \\
+    		SuperConformal & $s_{\a A}$ and $\widetilde{s}_{\dot{\a}}^A$ & $-1/2$ \\ \\
+    		Special Conformal & $k_{\a\dot{\a}}$ & $-1$ \\
+    		\bottomrule
+    	\end{tabular}
+    \end{center}
+}
+
+The reason we listed their mass dimensions is that it gives us insight into the structure of the superconformal symmetry algebra, namely through the fact that the weight of the commutator of objects of weight $w_1$ and $w_2$ is $(w_1+w_2)$. In particular this allows us to see that we can obtain all other generators from commuting $q,\widetilde{q}, s$ and $\widetilde{s}$.\footnote{Note this is just a heuristic argument. In itself it does not tell us how to relate $p^{\dot{\a}\a}$, say, to the $q$s and $s$s. The  point is that you can anticipate the structure of the superalgebra simply from dimensional analysis and index structure, but you would need to carry out a calculation to prove it. The bottom line is that if you want to verify that an amplitude is superconformal, it's sufficient to show that its annihilated by the $q$s and $s$s.}
+
+We also modify the definition of the helicity operator to be 
+\be 
+\label{eqn:HelicityModified}
+    h := \frac{1}{2}\bigg( - \l^{\a} \frac{\p}{\p \l^{\a}} + \widetilde{\l}^{\dot{\a}}\frac{\p}{\p \widetilde{\l}^{\dot{\a}}} + \eta^A \frac{\p}{\p \eta^A}\bigg).
+\ee 
+We can easily check that this commutes with all of the generators, and so it represents a central extension of the algebra. In other words it can be used to define a central charge $c$. For example, we find that 
+\bse 
+    \{ q^{\a A}, s_{\beta B}\} = {m^{\a}}_{\beta} \del^A_B + \del^{\a}_{\beta} {r^A}_B + \frac{1}{2}\del^{\a}_{\beta} \del^A_B \big(d+c\big),
+\ese 
+where 
+\mybox{
+    \be 
+    \label{eqn:CentralCharge}
+        c = 1-h.
+    \ee 
+}
+\noindent We the define \textit{superamplitudes} to be annihilated by all superconformal generators and the central charge $c$, just as our `normal' amplitudes were annihilated by the conformal generators. It follows from \Cref{eqn:CentralCharge}, then, that \textit{all} superamplitudes have helicity $+1$:
+\bse  
+    c A = 0 \qquad \iff \qquad hA = A.
+\ese 
+
+What exactly \textit{is} a superamplitude? It should be thought of as the scattering amplitude for superfields, which encode all on-shell degrees of freedom.\footnote{See SUSY course for more details on superfields.} For $\cN=4$ SYM with gauge group $SU(N)$ the superfields are given by the component decomposition 
+\bse 
+    \Phi(\l,\widetilde{\l},\eta) = g_+(p) + \eta^A \psi_A(p) + \frac{1}{2}\eta^A\eta^B \phi_{AB}(p) + \frac{1}{3!} \eta^A\eta^B\eta^C \epsilon_{ABCD}\bar{\psi}^D(p) + \frac{1}{4!}\eta^A\eta^B\eta^C\eta^D \epsilon_{ABCD}g_-(p),
+\ese 
+where $p = \widetilde{\l}\l$ and where 
+\begin{itemize}
+    \item $g_{\pm}$ are gluons, i.e. $h=\pm1$, respectively,
+    \item $\psi_A$ and $\bar{\psi}^A$ are $4+4$ Fermions, i.e. $h=\pm 1/2$, respectively
+    \item $\phi_{AB} = -\phi_{BA}$ are $6$ scalars, i.e. $h=0$,
+\end{itemize}
+are known as the \textit{components}, and they all transform in the adjoint representation of $SU(N)$ (we have suppressed the colour indices above). From this it is easy to check that $h\Phi =\Phi$. 
+
+Note that we have $2+6=8=4+4$ Bosons and Fermions, respectively, which is in agreement with the fact that SUSY requires there to be the same number of each. Indeed, SUSY mixes Bosons and Fermions and the SUSY transformations of component fields can be read off from\footnote{For more details on how to do this, again see the SUSY course.}
+\bse 
+    \del_q \Phi \equiv \xi_{\a A} q^{\a A}\Phi, \qand \del_{\bar{q}} \Phi \equiv \bar{\xi}_{\dot{\a}}^A \bar{q}^{\dot{\a}}_A \Phi.
+\ese 
+
+\subsection{Superamplitudes}
+
+A superamplitude encodes gluon amplitudes and all other component amplitudes related by SUSY. In general the superamplitude will be a polynomial in $\eta$s, and the component amplitudes are coefficients of the polynomial.\footnote{Again this idea should be clear from the SUSY course.} Since each component field is associated with a certain monomial of $\eta$s in the superfield, each component amplitude is multiplied by the product of $\eta$ monomials for each component field in the amplitude. 
+
+For example, an $n$-point MHV amplitude $A_n(-,-,+,...,+)$ will be multiplied by $(\eta_1)^4(\eta_2)^4$, where 
+\bse 
+    (\eta_i)^4 = \frac{1}{4!} \epsilon_{ABCD}\eta_i^A\eta_i^B\eta_i^C\eta_i^D,
+\ese 
+since each negative helicity gluon, $g_-(p)$, appears with $(\eta)^4$ in the superfield, but the positive helicity gluon, $g_+(p)$, doesn't appear with any $\eta$s.
+
+From this, we see that the superamplitude which contains an MHV amplitude must have Fermionic degree of weight $8$. On the other hand, it must be annihilated by the multiplicative charges
+\bse 
+    q^{\a A} = \sum_{i=1}^n \l^{\a}_i \eta_i^A \qand p^{\dot{\a}\a} = \sum_{i=1}^n \widetilde{\l}^{\dot{\a}}_i \l^{\a}_i.
+\ese
+Hence, the MHV superamplitude must take the form 
+\bse
+    \mathbb{A}_n^{\text{MHV}} = \del^4(p) \del^8(q) P_n(\l_i, \widetilde{\l}_i)
+\ese 
+where 
+\be 
+\label{eqn:del8q}
+    \del^8(q) := \frac{1}{2^4} \prod_{A=1}^4 q^{\a A}q_{\a}^A = \prod_{A=1}^4 \sum_{i<j} \la ij \ra \eta_i^A \eta_j^A.
+\ee 
+Moreover, we can determine the function $P_n$ by demanding that the $(\eta_1)^4(\eta_2)^4$ component of the superamplitude is $A_n(-,-,+,...,+)$. Noting that 
+\bse 
+    \int d^4 \eta_1 d^4 \eta_2 \del^8(q) = \la 12 \ra^4,
+\ese 
+we see that $P_n$ must be 
+\bse 
+    P_n = \frac{1}{\la 12\ra ... \la n1 \ra}. 
+\ese 
+Hence 
+\mybox{
+    \be 
+    \label{eqn:MHVSuperamplitude}
+        \mathbb{A}_n^{\text{MHV}} = \frac{\del^4(p)\del^8(q)}{\la 12 \ra ... \la n1 \ra}.
+    \ee 
+}
+
+\br
+    Note that this amplitude encodes all $n$-point gluonic MHV amplitudes. Indeed 
+    \bse 
+        \int d^4\eta_i d^4\eta_j \mathbb{A}_n^{\text{MHV}} = \frac{\la ij \ra^4}{\la 12 \ra ... \la n1\ra} \del^4(p).
+    \ese 
+    It also encodes amplitudes with scalars and Fermions. 
+\er 
+
+\subsection{Supertwistor Space \& Yangian Symmetry}
+
+Now note that, apart from through $\del^4(p)$, \Cref{eqn:MHVSuperamplitude} does not depend on $\widetilde{\l}$s at all! This has important consequence. In particular let's Fourier transform the amplitude in $\widetilde{\l}_i$ and $\eta_i$, using $\mu_i$ and $\chi_i$ being the Fourier conjugates, respectively: 
+\bse 
+    \begin{split}
+        \mathbb{A}_n(\l_i, \mu_i, \chi_i) & = \int \prod_{i=1}^n \frac{d^2\widetilde{\l}_i d^4\eta_i}{(2\pi)^4} \exp\bigg[ i \bigg( \sum_{i=1}^n \big(\mu_i^{\dot{\a}} \widetilde{\l}_{i\dot{\a}} + \chi_i^A\eta_{iA}\big) \bigg) \bigg] \\
+        & \qquad \times \int d^4x d^8\Theta \exp\bigg[ i\bigg( x_{\a\dot{\a}} \sum_{i=1}^n \widetilde{\l}_i^{\dot{\a}} \l_i^{\a} + \Theta_{\a}^A \sum_{i=1}^n \eta_{iA}\l_i^A\bigg) \bigg] \frac{1}{\la 12 \ra ... \la n1 \ra} \\
+        & = \int d^4x d^8\Theta \prod_{i=1}^n \del^2\big(\mu_i + x\cdot \l_i\big) \del^4\big(\chi_i + \Theta\cdot \l_i\big) \frac{1}{\la 12 \ra ... \la n1 \ra},
+    \end{split}
+\ese 
+where we have used 
+\bse 
+    \del^4(p) \del^8(q) = \int d^4x d^8\Theta \exp\bigg[ i\bigg( x_{\a\dot{\a}} \sum_{i=1}^n \widetilde{\l}_i^{\dot{\a}} \l_i^{\a} + \Theta_{\a}^A \sum_{i=1}^n \eta_{iA}\l_i^A\bigg) \bigg].
+\ese 
+The space $(\l,\mu,\chi)$ is known is \textit{supertwistor space}. We then find that MHV superamplitudes are supported on degree 1 curves in twistor space. $(x,\Theta)$ are the moduli of the curves. More generally, $N^k$MHV amplitudes are supported on $(k+1)$ degree curves. This property of amplitudes can be made manifest by reformulating $\cN=4$ SYM as a string theory whose target space is twistor space. For obvious reasons we do not discuss this further here but further details can be found via \href{https://arxiv.org/pdf/hep-th/0312171.pdf}{hep-th/0312171}.
+
+Twistors are also useful for studying the symmetries of scattering amplitudes. In particular, if we replace 
+\bse 
+    \widetilde{\l} \to \frac{\p}{\p\mu}, \qquad \frac{\p}{\p \widetilde{\l}} \to \mu, \qquad \eta_A \to \frac{\p}{\p \chi^A}, \qand \frac{\p}{\p \eta_A} \to \chi^A 
+\ese
+in the definition of the super conformal generators defined earlier, we find that they all become first order differential operators 
+\bse 
+    {J^{(0)a}}_b = \sum_{i=1}^n Z_i^a \frac{\p}{\p Z_i^b},
+\ese 
+where 
+\bse 
+    Z_i^a := \begin{pmatrix}
+        \l^{\a} \\
+        \mu_{\dot{\a}} \\
+        \chi^A 
+    \end{pmatrix}.
+\ese 
+For example, 
+\bse 
+    p_i = \sum_{i=1}^n \widetilde{\l}_i^{\dot{\a}} \l_i^{\a} \to \sum_{i=1}^n \l_i^{\a} \frac{\p}{\p \mu_{i\dot{\a}}}. 
+\ese
+Hence, superconformal symmetry is linearly realised in twistor space; twistors transform in the fundamanetal representation of the superconformal group. 
+
+Furthermore, the following non-local operators are also symmetries of the planar amplitudes, which are hidden from the point of view of the action:
+\bse 
+    {J^{(1)a}}_b = \sum_{i<j} \bigg[ Z_i^a \frac{\p}{\p Z_i^c} Z^c_j \frac{\p}{\p Z_j^b} - (i\leftrightarrow j) \bigg].
+\ese  
+Note that the algebra of these generators does not close and implies an infinite-dimensional symmetry known as \textit{Yangian symmetry}. This is a hallmark of integrability, and is another hint that $\cN=4$ SYM has a worldsheet description since integrability is usually restricted to $2d$ models. In fact the Yangian symmetry of $\cN=4$ SYM can be understood from IIB string theory on $AdS_5\times S^5$, which is dual to $\cN=4$ SYM at strong coupling. 
+
+In summary, scattering amplitudes are not only essential for relating theory to experiment, they also provide a window into the underlying mathematical structure of QFT. 

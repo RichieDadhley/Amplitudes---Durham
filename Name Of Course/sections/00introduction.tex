@@ -1,0 +1,52 @@
+\chapter{Introduction}
+
+Scattering amplitudes are the bread and butter of modern particle physics. Broadly speaking, they describe the probability for a collection of particles to interact in a certain way. One of the things that has been deriving the research in this area is that they have remarkably simple mathematical constructions. 
+
+We are (hopefully) familiar with amplitudes\footnote{From now on we may simply say "amplitudes" to mean scattering amplitudes.} from our previous QFT courses and we know that we can calculate them from the Feynman diagrams. The natural question that arises, then, is "why do we want a whole other course dedicated to this?" Well, as we will hopefully convince, there is an alternate way to compute amplitudes that drastically reduces the complexity of the computations and makes manifest these simplifications. In order to do that, of course it is first useful to remind ourselves what exactly an amplitude is. 
+
+We will also clear up our conventions in the rest of this introduction. 
+
+\section{What Is A Scattering Amplitude?}
+
+\bd 
+    We define a scattering amplitude as a matrix element 
+    \be 
+    \label{eqn:Amplitude}
+        \cA = \bra{\text{out}} S \ket{\text{in}}
+    \ee 
+    with our states being asymptotic past/future states --- i.e. $\ket{\text{in}}$ is evaluated at $t\to -\infty$ and $\bra{\text{out}}$ at $t\to +\infty$ --- they are given by direct products of single particle states with definite \textit{on-shell} momentum and polarisation. We denote them as follows $\ket{p_i,\epsilon_i}$. 
+\ed 
+
+\br  
+    We shall work with the "mostly minus", $(+,-,-,-)$, sign convention. 
+\er 
+
+As we are aware, it is convenient to split $\cA$ into two parts which correspond to connected and unconnected diagrams. We do this by setting 
+\bse
+    S = \b1 + i T
+\ese 
+with $T$ being the \textit{transition amplitude}. Next recall that the LSZ formula states that\footnote{More details about the LSZ reduction formula can be found in, for example, Chapter 8 of my IFT notes or section 3.2 of my QFT II notes.} 
+\bse 
+    \bra{\text{out}} iT \ket{\text{in}} = \prod_{i=1}^{n_i+n_f} \sqrt{Z_i} \, ( ... )
+\ese 
+with the $...$ stands for "sum of all amputated and connected Feynman diagrams dressed with polarisations, with $n_i$ incoming states and $n_f$ outgoing states." The factor $Z_i$ is known as the \textit{wavefunction renormalisation} and it can be computed from the residue of the 2-point function. The observable thing in the end is the so-called \textit{differential cross section}, which is obtained from $|T|^2$. 
+
+\section{What's Wrong With The Feynman Diagram Approach?}
+
+We now return to the comment we made at the start of this introduction that although in principle we know how to compute amplitudes from the Feynman diagrams that this course aims to present an alternate method quoting the mantra of "it simplifies the calculations". Let's expand a little bit on why this is the case now.
+
+Of course Feynman diagrams are an extremely useful tool to particle physicists, but nothing is perfect and they do indeed have problems. This is not some new profound statement but simply corresponds to the fact that when we want to work to higher accuracy with Feynman diagrams we necessarily have to include more diagrams. As well as this calculating more complicated processes naturally involves considering more particles and therefore more terms. It is easy to see that we end up needing to process \textit{huge} amounts of information. For example, the $n$-point gluon amplitude grows as $n!$.
+
+The big motivational point to notice is that, once these heavy computations are done, we end up obtaining extremely nice expressions. That is we start of with some highly complicated collection of data but cranking the handle on the calculation leads to huge simplifications at some point. The idea of this course is to try reformulate the calculations in order to make this simplifications manifest. 
+
+To give one last guiding remark, one of the main problems with the Feynman diagram approach we seek to counteract is the fact that individual diagrams are \textit{not} gauge invariant; it is only their \textit{sum} that is. Feynman diagrams also involve the computation of \textit{off-shell}, virtual, particles. However, as we should be aware, the amplitude must be gauge invariant (it's physically observable!) and it knows nothing about off-shell degrees of freedom (our states in \Cref{eqn:Amplitude} are \textit{on-shell}). 
+
+The ultimate message is that the methods presented in this course are more than just being more efficient/being clever, but they point towards new, alternative reformulations of physics. 
+
+\br 
+    A warning before proceeding: A lot of the initial work is going to be setting up efficient notation. This might be boring at first, but it will have huge pay offs later. So bare with it. 
+\er 
+
+\br 
+    Ultimately\footnote{At least for $\cN=4$ Super Yang-Mills theory.} the reformulation presented here involves elements of twistor string theory. Of course we will not go into the details here, but this remark is just to highlight this fact. 
+\er

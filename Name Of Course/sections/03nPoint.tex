@@ -1,0 +1,570 @@
+\chapter{$n$-Point Amplitudes}
+
+So far we have derived two very powerful techniques: the spinor-helicity formalism and colour-ordering. We now want to put these two techniques together in order to compute some amplitudes.
+
+\section{3-Point Amplitudes}
+
+We start by considering $3$-point amplitudes as these are the most simple and give hints at how to extend to higher point amplitudes. The first thing we note is that for 3-point amplitudes \textit{all} kinematical invariants vanish. We see this simply from 
+\bse 
+    p_1+p_2+p_3 = 0 \qquad\implies \qquad 2p_1\cdot p_2 = (p_1+p_2)^2 = p_3^2 = 0,
+\ese 
+and similarly $p_1\cdot p_3 = 0 = p_2\cdot p_3$. If we convert this into spinor formalism, it becomes
+\be 
+\label{eqn:3PointSpinorInnerProductVanish}
+    0 = (p_i+p_j)^2 = - \la ij \ra [ij].
+\ee 
+Next we recall that if we have real momenta we require $\la ij \ra = -[ij]^*$, and so the only way we can satisfy the above relation is if all spinor inner products vanish. It follows from this that we cannot define any non-trivial amplitudes. Ah... that's not so good.
+
+So what do we do? Well the above followed directly from us imposing that the momenta are real, so we could ask the question "what if they're complex?" As we said before, in this $\l^{\a}$ and $\widetilde{\l}^{\dot{\a}}$ are independent and so the two inner products are independent. This means we could satisfy \Cref{eqn:3PointSpinorInnerProductVanish} by setting \textit{either} $\la i j\ra =0$ \textit{or} $[ij]=0$, with the other not needing to vanish. This is exactly what we are going to do. 
+
+Before moving on it is worth keeping in mind that this complex momenta condition comes from complexifying our spacetime and so is unphysical. Therefore the results we obtain here do not represent good physics (they will all vanish when we impose reality conditions), however they are worth pursuing as they give nice mathematical insight. 
+
+The first thing we do is to express our momentum conservation in terms of spinors. Using $p_i = \l_i \widetilde{\l}_i$ we have 
+\bse 
+    \l_1\widetilde{\l}_1 + \l_2\widetilde{\l}_2 + \l_3\widetilde{\l}_3 = 0.
+\ese 
+Next let's contract with $\l_1$, using $\la 11 \ra = 0$, we are left with
+\bse 
+    \la 12 \ra \widetilde{\l}_2 + \la 13 \ra \widetilde{\l}_3 = 0.
+\ese 
+If we then assume that $\la 12 \ra \neq 0$, we obtain 
+\bse 
+    \widetilde{\l}_2 = \frac{\la 13 \ra}{\la 12 \ra} \widetilde{\l}_3.
+\ese 
+Similarly if we had contracted with $\l_2$ we would obtain 
+\bse 
+    \widetilde{\l}_1 = \frac{\la 23 \ra }{\la 21 \ra }\widetilde{\l}_3,
+\ese
+and so in total we have 
+\bse 
+    \widetilde{\l}_1 \propto \widetilde{\l}_2 \propto \widetilde{\l}_3,
+\ese 
+but if this is the case then we have 
+\bse 
+    [ij] \propto [ii] = 0 
+\ese 
+and so all square bracket inner products vanish. That is 
+\bse 
+    [12] = [13] = [23] = 0.
+\ese 
+Similarly if we had taking contractions with the tilded $\widetilde{\l}$s and assumed that the square bracket inner products were non-vanishing we would obtain 
+\bse 
+    \la 12 \ra = \la 13 \ra = \la 23 \ra = 0.
+\ese
+So we have that all 3-point amplitudes \textit{only} depend on $\la ij \ra $ \textit{or} only depend on $[12 ]$. Note this result is more restrictive then \Cref{eqn:3PointSpinorInnerProductVanish} itself, as this is satisfied with
+\bse 
+    \la 12 \ra = [23] = [13] =0,
+\ese
+and so the 3-point amplitude would depend on $[12], \la 23 \ra$ and $\la 13\ra$. 
+
+\br 
+    The above result, that the 3-point amplitude only depends on $\la ij \ra$ or $[ij]$, turns out to be equivalent to saying that they are holomorphic or antiholomorphic, respectively. 
+\er
+
+Ok let's compute the 3-point amplitudes explicitly. From our colour ordered Feynman rules, we have 
+\begin{center}
+    \btik 
+        \node[left] at (-1.5,0) {\large{$A(\{p_i,\epsilon_i\}) \, =$}};
+        \midarrow (0,0) -- (0,1) node [above] {$\epsilon_1,p_1$};
+        \midarrow[rotate around={120:(0,0)}] (0,0) -- (0,1) node [below] {$\epsilon_3,p_3$};
+        \midarrow[rotate around={-120:(0,0)}] (0,0) -- (0,1) node [below] {$\epsilon_2,p_2$};
+        \node[right] at (1.5,0) {\large{$= \, \sqrt{2}\big[ (\epsilon_1\cdot \epsilon_2)(\epsilon_3 \cdot p_1) + (\epsilon_2\cdot \epsilon_3)( \epsilon_1 \cdot p_2) + (\epsilon_3\cdot \epsilon_1)(\epsilon_2 \cdot p_3) \big]$}};
+    \etik
+\end{center}
+where we have 
+\bse 
+    iT_3 = -ig^{3-2}A = -igA. 
+\ese
+
+We now want to simplify this. We do this by first considering the case where all the gluons have the same helicity. W.l.o.g. let's take them to all be $+$. Then from \Cref{eqn:PolarisationsAsSpinors} we have
+\bse 
+    \epsilon_+(p_i,q_i) \cdot \epsilon_+(p_j,q_j) = 2 \frac{\la q_i q_j\ra [p_jp_i]}{\la q_i p_i\ra \la q_j p_j \ra}
+\ese 
+where\footnote{Again here $i$ labels the gluon we're considering, not a spatial index.} $p_i^{\dot{\a}\a} = \widetilde{\l}^{\dot{\a}}_i\l_i^{\a}$ are the momenta and $q_i^{\dot{\a}\a} = \widetilde{\mu}^{\dot{\a}}_i\mu^{\a}_i$ are the reference momenta encoding the gauge invariance. The inner products in the above are meant to be understood as the relative parts, i.e. 
+\bse 
+    \la q_i q_j \ra =  \mu_i^{\a} \mu_{j\a} \qand [p_j p_i] = \widetilde{\l}_{j\dot{\a}} \widetilde{\l}^{\dot{\a}}_i,
+\ese
+etc. Now if we choose $q_1=q_2=q_3$ then $\la q_i q_j \ra = 0$ and so the above vanishes. A similar calculation shows that 
+\bse 
+    \epsilon_-(p_i,q_i) \cdot \epsilon_-(p_j,q_j) = 0.
+\ese    
+We summarise this below:
+\mybox{
+    \be 
+    \label{eqn:Apmpmpm}
+        A(\pm \pm \pm) =0,
+    \ee 
+}
+\noindent where hopefully the notation is clear.
+
+\subsection{MHV \& $\overline{\text{MHV}}$}
+
+Ok so what if only one polarisation is different? That is consider $A(1^-2^-3^+)$, which is the 3-point minimal helicity violating (MHV) amplitude. Well from above we have 
+\be 
+\label{eqn:A--+}
+    A(1^-,2^-,3^+) = \sqrt{2}\big[ (\epsilon_1^-\cdot \epsilon_2^-)(\epsilon_3^+ \cdot p_1) + (\epsilon_2^-\cdot \epsilon_3^+)( \epsilon_1^- \cdot p_2) + (\epsilon_3^+\cdot \epsilon_1^-)(\epsilon_2^- \cdot p_3) \big],
+\ee
+Next, we have\footnote{Note on the minus sign in the $\epsilon^+_i\cdot \epsilon^-_j$ expression is taken care of by swapping $[q_jp_i]=-[p_iq_j]$. Similarly for the $\epsilon^+_i\cdot p_j$ with $[p_jp_i]=-[p_ip_j]$.}
+\be 
+\label{eqn:PolarisationInnerProducts}
+    \begin{split}
+        \epsilon_i^- \cdot \epsilon_j^- & = \frac{[q_iq_j] \la p_jp_i\ra }{[q_ip_i] [q_j p_j]} \\
+        \epsilon_i^+ \cdot \epsilon_j^- & = \frac{ [p_iq_j] \la q_ip_j\ra }{\la q_ip_i\ra [q_j p_j] \ra} \\
+        \epsilon_i^+ \cdot p_j & = \frac{ [p_ip_j] \la q_ip_j\ra }{ \sqrt{2}\la q_ip_i\ra} \\
+        \epsilon_i^- \cdot p_j & = \frac{ [p_jq_i] \la p_i p_j \ra }{\sqrt{2} [q_ip_i] }
+    \end{split}
+\ee 
+where we have used the fact that when going from Lorentz contractions (which the $\cdot$ represents) to spinor contractions we get a factor of $1/2$, as in \Cref{eqn:LorentzToSpinorContraction}. We can then express our 3-point MHV amplitude in terms of spinor inner products. Again the $q_i^{\dot{\a}\a} = \widetilde{\mu}^{\dot{\a}} \mu^{\a}$ are our reference momenta. If we pick 
+\bse 
+    \widetilde{\mu}_1 = \widetilde{\mu}_2 \qand \mu_3 = \l_1
+\ese 
+then we have 
+\bse 
+    [q_1q_2] = 0 \qand \la q_3 p_1 \ra = 0.
+\ese 
+From this only the middle term in \Cref{eqn:A--+} survives:
+\bse 
+    A(1^-,2^-,3^+) = \frac{\la q_3 2 \ra [3q_2]}{\la q_3 3 \ra} \frac{ [q_1 2] \la 21 \ra }{[1q_1]},
+\ese 
+where we have used a notation where just a number means $p$, i.e. $\la q_3 2 \ra = \la q_3 p_2\ra$. Then we use our reference momenta definitions to replace 
+\bse 
+    \begin{split}
+        \la q_3 2 \ra & \longrightarrow \la 12 \ra \\
+        \la q_3 2 \ra & \longrightarrow \la 12 \ra \\
+        [q_1 2] & \longrightarrow [q_1 2] \\
+        [1 q_1] & \longrightarrow [1q_2],
+    \end{split}
+\ese 
+to obtain 
+\bse 
+    A(1^-,2^-,3^+) = - \frac{\la 12\ra^2}{\la 13\ra } \frac{[3q_2]}{[1q_2]}
+\ese 
+where we have also used $\la 21 \ra = -\la 12 \ra$. 
+
+This is nice, but really we want to remove the reference momenta from the expression. We do this by considering momentum conservation 
+\bse 
+    \l_1 \widetilde{\l}_1 + \l_2 \widetilde{\l}_2 + \l_3 \widetilde{\l}_3 = 0,
+\ese 
+which if we contract with $\l_2 \widetilde{\mu}_2$ we get 
+\be 
+\label{eqn:3q21q2}
+    \la 21 \ra [1q_2] + \la 23 \ra [3 q_2] = 0 \qquad \implies \qquad \frac{[3q_2]}{[1q_2]} = \frac{\la 12\ra }{\la 23 \ra}. 
+\ee 
+Putting this all together we get 
+\mybox{
+    \be 
+    \label{eqn:A--+Final}
+        A(1^-,2^-,3^+) = \frac{\la 12 \ra^4}{\la 12 \ra \la 23 \ra \la 31 \ra}, \qquad \text{with} \qquad \widetilde{\l}_1 \propto \widetilde{\l}_2 \propto \widetilde{\l}_3,
+    \ee 
+}
+\noindent where we have multiplied denominator and numerator by $\la 12\ra$ to get a more symmetric looking denominator. Similarly we can calculate the \textit{anti-MHV} (or $\overline{\text{MHV}}$) expression 
+\mybox{
+    \be 
+    \label{eqn:A++-Final}
+        A(1^+,2^+,3^-) = -\frac{ [12]^4}{[12][23][31]}, \qquad \text{with} \qquad \l_1 \propto \l_2 \propto \l_3.
+    \ee 
+}
+
+Let's make a couple comments:
+\begin{itemize}
+    \item We now note that we only set $\widetilde{\mu}_1=\widetilde{\mu}_2$ but didn't say how they were related to the $\widetilde{\l}_i$s. Now if we set $\widetilde{\mu}_2 = \widetilde{\l}_3$ then we would have $[3q_2]=0$ and so the numerator in \Cref{eqn:3q21q2} would vanish, which in turn suggest that \Cref{eqn:A--+Final} vanishes. However we then note that we already have $\widetilde{\mu}_1 = \widetilde{\mu}_2$ and so we must also have $\widetilde{\mu}_1 = \widetilde{\l}_3 \propto \widetilde{\l}_1$, and so $[1q_2]=0$. This is the denominator of \Cref{eqn:3q21q2}, and so we just get $\frac{0}{0}$, which is ill-defined.  
+    \item For real momenta we know all our inner products vanish and so our amplitudes simply become 
+    \bse 
+        A(1^-,2^-,3^+) = \frac{0^4}{0^3} = 0 \qand A(1^+,2^+,3^-) = - \frac{0^4}{0^3} = 0,
+    \ese    
+    so both amplitudes vanish, which is what we needed. That is we only get non-vanishing 3-point amplitude for complex momenta. 
+    \item We can actually obtain the form of $\Cref{eqn:A--+}$ from helicity arguments. We have 
+    \bse 
+        \begin{split}
+            h_1 A(1^-,2^-,3^+) &= h_2 A(1^-,2^-,3^+) = - A(1^-,2^-,3^+), \qand \\
+            h_3A(1^-,2^-,3^+) & = + A(1^-,2^-,3^+),
+        \end{split}
+    \ese 
+    where 
+    \bse 
+        h_i = \frac{1}{2}\bigg(-\l^{\a}_i \frac{\p}{\p \l_i^{\a}} + \widetilde{\l}^{\dot{\a}}_i \frac{\p}{\p \widetilde{\l}^{\dot{\a}}_i} \bigg).
+    \ese 
+    If we then use the ansantz 
+    \bse 
+        A(1^-,2^-,3^+) = \la 12 \ra^X \la 23\ra^Y \la 31 \ra^Z
+    \ese
+    then act with the helicity operators and compare with the above we get the following simultaneous equations 
+    \bse 
+        -\frac{1}{2}(X+Z) = -1 \qquad -\frac{1}{2}(X+Y) = -1 \qand -\frac{1}{2}(Y+Z) = 1
+    \ese 
+    which solves to give us 
+    \bse 
+        X = 3 \qand Y = Z = -1,
+    \ese 
+    which gives us \Cref{eqn:A--+Final}. Of course we only really know this is correct up to a normalisation. We could then ask "why didn't we consider the ansatz $A(1^-2^-3^+) = [12]^X[23]^Y[31]^Z$?" The answer is if we do a similar calculation for this we can show that the result violates locality so must be excluded.\footnote{This is a problem on the worksheets, so I will not type the answer here.}
+    
+    This result is particularly nice because it allows to extend the above result to a MHV 3-point amplitude of particles of spin-$s$ as
+    \bse 
+        A(1^-,2^-,3^+) = \bigg( \frac{\la 12 \ra^4}{\la 12 \ra \la 23 \ra \la 31 \ra} \bigg)^s.
+    \ese 
+    \item Using the cyclicity of the colour-ordered amplitudes, we have 
+    \bse 
+        \begin{split}
+            A(1^-,2^+,3^-) & = A(3^-,1^-,2^+) = \frac{\la 13 \ra^4}{\la 12 \ra \la 23 \ra \la 31 \ra} \\
+            A(1^+,2^-,3^-) & = A(2^-,3^-,1^+) = \frac{\la 23 \ra^4}{\la 12 \ra \la 23 \ra \la 31 \ra} 
+        \end{split}
+    \ese 
+\end{itemize}
+
+\bbox 
+    Convince yourself that the 3-point MHV amplitude is totally antisymmetric under exchange of particle labels. That is show that 
+    \bse 
+        A(2^-,1^-,3^+) = - A(1^-,2^-,3^+) \qand A(3^+,2^-,1^-) = - A(1^-,2^-,3^+). 
+    \ese 
+    \textit{Hint: This can be shown either using the cyclicity properties above or via the explicit expression in terms of polarisation and momenta.}
+\ebox 
+
+\section{$n$-Point Amplitudes: Parke-Taylor Formula}
+
+Now it might seem a bit strange that we are finding the 3-point amplitudes, given that we have shown that all \textit{physical} (i.e. real momenta) 3-point amplitudes must vanish. Well, remarkably, the formula for the 3-point MHV amplitudes has simple generalisation to any $n$-point amplitude, known as the \textit{Parke-Taylor formula}:
+\mybox{
+    \be 
+    \label{eqn:ParkeTaylorMHV}
+        A(1^+, 2^+, ... , i^-, ... , j^-, ... , n^+) = \frac{\la ij \ra^4 }{\la 12 \ra \la 23 \ra ... \la (n-1) n \ra \la n 1 \ra}
+    \ee 
+    and 
+    \be 
+    \label{eqn:ParkeTaylorMHVBar}
+        A(1^-, 2^-, ... , i^+, ... , j^+, ... , n^-) = - \frac{[ij]^4 }{ [12][23]... [(n-1) n][n 1]}
+    \ee 
+}
+\noindent with the $\widetilde{\l}_1 \propto \widetilde{\l}_2$ etc conditions applied as with \Cref{eqn:A--+Final,eqn:A++-Final}.
+
+\br 
+\label{rem:MHVClarity}
+    Note that in the Parke-Taylor formulas we have two of the polarisations being different, rather then just one (as in \Cref{eqn:AmppmNPoint}). Of course for the 3-point amplitude these two cases coincide (as $3-2=1$). This remark is included just to clarify what is meant by MHV/$\overline{\text{MHV}}$: two polarisations differ from the rest. 
+\er 
+
+The Parke-Taylor formulas are the MHV and $\overline{\text{MHV}}$ expressions, but for the 3-point amplitudes we also showed that $A(\pm\pm\pm)=0$, so the natural question is "does this hold for higher point amplitudes?" 
+
+\bcl 
+\label{claim:Apm}
+    Yes, it does hold. That is 
+    \be 
+    \label{eqn:ApmNPoint}
+        A(\pm \pm ... \pm) = 0.
+    \ee 
+\ecl 
+
+In order to prove the above claim, we need to introduce the following Lemma.
+
+\bl 
+\label{Lem:nPoint3Point}
+    A tree-level $n$-point diagram can have, at most, $(n-2)$ 3-point vertices. 
+\el 
+
+\bbox 
+    Prove \Cref{Lem:nPoint3Point}. \textit{Hint: Prove it inductively.}
+\ebox 
+
+\bq
+    (Of \Cref{claim:Apm}). Note that 
+    \ben[label=(\roman*)]
+        \item A gluon amplitude can be expressed as a sum of Feynman diagrams with a polarisation vector associated to each external leg. 
+        \item Since the amplitude is a Lorentz scalar, each polarisation vector \textit{must} be contracted with either another polarisation vector or an external momentum. 
+        \item If it is contracted to an external momentum, it must be through a 3-point vertex as the 4-point vertex doesn't involve momenta. 
+        \item By \Cref{Lem:nPoint3Point}, there are at most $(n-2)$ 3-point vertices, each of which could potentially contract an external polarisation vector with an external momentum. Therefore in each diagram we must have at least two polarisation vectors which aren't contracted with an external momentum, and so must be contracted with each other.
+        \item Recall that if we pick the reference momenta $q_i=q_j$ then $\epsilon_i^{\pm}\cdot \epsilon_j^{\pm}=0$. Hence if they all have the same helicity, as in \Cref{eqn:ApmNPoint}, we can pick the reference momenta such that $\epsilon_i\cdot \epsilon_j = 0$ for all $\{i,j\}$, and since each diagram contains at least one such contraction the amplitude must vanish. 
+    \een 
+\eq 
+
+We now return to what we were trying to say in \Cref{rem:MHVClarity}; using similar arguments to the above proof we can show that 
+\mybox{
+    \be 
+    \label{eqn:AmppmNPoint}
+        A(\mp \pm \pm ... \pm ) = 0 \qquad \forall n > 3.
+    \ee 
+}
+\noindent In particular, setting $q_i=p_1$ for all $i>1$ ensures that all inner products of polarisation vectors vanish: from \Cref{eqn:PolarisationInnerProducts} we see
+\bse 
+    \epsilon_i^{\pm}\cdot \epsilon_j^{\pm} = 0 \qquad \forall i,j > 1 \qquad \text{since } q_i=q_j
+\ese 
+and 
+\bse 
+    \epsilon_i^{\pm}\cdot \epsilon_1^{\mp} = 0 \qquad \forall i>1 \qquad \text{since } q_i=p_1.
+\ese 
+
+\br 
+    Recall that for real momenta \Cref{eqn:AmppmNPoint} also holds for $n=3$, but for complex momenta setting $q_i=p_1$ for all $i>1$ generally results in $0/0$ for 3-point kinematics. In this case we can define non-trivial 3-point MHV/$\overline{\text{MHV}}$ amplitudes.
+\er 
+
+Hopefully now \Cref{rem:MHVClarity} is more clear, and we summarise it in the following definition. 
+
+\bd[Maximal Helicity Violating]
+    An amplitude is said to be \textit{maximal helicity violating} (MHV)\footnote{Of course we have used a convention to distinguish MHV from $\overline{\text{MHV}}$, but hopefully that is clear by now.} if exactly two of the helicities differ from the rest. 
+\ed 
+
+MHV gets its name from the fact that it corresponds to the biggest change of helicity from incoming to outgoing. This might not seem obvious at first but we have to remember that we take all of our particles to be outgoing and that switching them to incoming flips the helicity. So $A(-,-,+,+,...,+)$ corresponds to $n$ \textit{outgoing} particles with 2 negative helicities and $(n-2)$ positive ones. If we change $m<(n-2)$ of the positive helicity particles to be our incoming ones, we get a situation where we have $m$ negative helicity incoming particles going to $2$ negative helicity and $(n-2-m)$ positive ones. If we considered $A(-,-,-,+,...,+)$ we would end up with $m$ negative to $3$ negative and $(n-3-m)$ positive, so the total change in helicity is less. The case with 3 differing helicities is known as \textit{NMHV}, where the "N" stands for "next". Similarly $A(-,-,-,-,+,...,+)$ is called NNMHV, or more simply $\text{N}^2$MHV. In general
+\bse 
+    A(1^-,2^-,...,k^-,(k+1)^+,...,n^+) \qquad \text{is N}^{k-2}\text{MHV}.
+\ese 
+
+
+Hopefully this explanation is clear, and in order to help, we depict the idea diagrammatically below: the left-hand diagram is MHV while the right-hand side is NMHV.
+
+\begin{center}
+    \btik 
+        \begin{scope}[xshift=-4cm]
+            \draw[thick] (0,0) circle [radius=0.75cm];
+            \midarrow[rotate around={-35:(0,0)}] (-0.75,0) -- (-1.75,0);
+            \node at (-1.7,1.2) {$-$};
+            \midarrow[rotate around={-55:(0,0)}] (-0.75,0) -- (-1.75,0);
+            \node at (-1.1,1.6) {$-$};
+            \midarrow[rotate around={-75:(0,0)}] (-0.75,0) -- (-1.75,0);
+            \node at (-0.5,2) {$+$};
+            \midarrow[rotate around={35:(0,0)}] (0.75,0) -- (1.75,0);
+            \node at (1.7,1.2) {$+$};
+            \midarrow[rotate around={55:(0,0)}] (0.75,0) -- (1.75,0);
+            \node at (1.1,1.6) {$+$};
+            \node[rotate around={-12.5:(0,0)}] at (0.25,1.25) {$\dots$};
+            %
+            \midarrow[rotate around={-35:(0,0)}] (1.75,0) -- (0.75,0);
+            \node at (1.7,-1.2) {$-$};
+            \midarrow[rotate around={-55:(0,0)}] (1.75,0) -- (0.75,0);
+            \node at (1.1,-1.6) {$-$};
+            \midarrow[rotate around={35:(0,0)}] (-1.75,0) -- (-0.75,0);
+            \node at (-1.7,-1.2) {$-$};
+            \midarrow[rotate around={55:(0,0)}] (-1.75,0) -- (-0.75,0);
+            \node at (-1.1,-1.6) {$-$};
+            \midarrow[rotate around={75:(0,0)}] (-1.75,0) -- (-0.75,0);
+            \node at (-0.5,-2) {$-$};
+            \node[rotate around={12.5:(0,0)}] at (0.25,-1.25) {$\dots$};
+            %
+            \node at (0,-2.5) {Incoming};
+            \node at (0,2.5) {Outgoing};
+        \end{scope}
+        \begin{scope}[xshift=4cm]
+            \draw[thick] (0,0) circle [radius=0.75cm];
+            \midarrow[rotate around={-35:(0,0)}] (-0.75,0) -- (-1.75,0);
+            \node at (-1.7,1.2) {$-$};
+            \midarrow[rotate around={-55:(0,0)}] (-0.75,0) -- (-1.75,0);
+            \node at (-1.1,1.6) {$-$};
+            \midarrow[rotate around={-75:(0,0)}] (-0.75,0) -- (-1.75,0);
+            \node at (-0.5,2) {$-$};
+            \midarrow[rotate around={35:(0,0)}] (0.75,0) -- (1.75,0);
+            \node at (1.7,1.2) {$+$};
+            \midarrow[rotate around={55:(0,0)}] (0.75,0) -- (1.75,0);
+            \node at (1.1,1.6) {$+$};
+            \node[rotate around={-12.5:(0,0)}] at (0.25,1.25) {$\dots$};
+            %
+            \midarrow[rotate around={-35:(0,0)}] (1.75,0) -- (0.75,0);
+            \node at (1.7,-1.2) {$-$};
+            \midarrow[rotate around={-55:(0,0)}] (1.75,0) -- (0.75,0);
+            \node at (1.1,-1.6) {$-$};
+            \midarrow[rotate around={35:(0,0)}] (-1.75,0) -- (-0.75,0);
+            \node at (-1.7,-1.2) {$-$};
+            \midarrow[rotate around={55:(0,0)}] (-1.75,0) -- (-0.75,0);
+            \node at (-1.1,-1.6) {$-$};
+            \midarrow[rotate around={75:(0,0)}] (-1.75,0) -- (-0.75,0);
+            \node at (-0.5,-2) {$-$};
+            \node[rotate around={12.5:(0,0)}] at (0.25,-1.25) {$\dots$};
+            %
+            \node at (0,-2.5) {Incoming};
+            \node at (0,2.5) {Outgoing};
+        \end{scope}
+    \etik  
+\end{center}
+
+\br 
+    As we mentioned in the footnote above, of course we have picked a convention for what we mean by MHV vs $\overline{\text{MHV}}$, and hopefully it is easy to see what the latter corresponds to diagrammatically. 
+\er 
+
+\section{4-Point MHV}
+
+Let's now compute the 4-point MHV colour-ordered amplitude $A_4(1^-,2^-,3^+,4^+)$. Recall that this is computed by summing over colour-ordered Feynman diagrams with a fixed cyclic ordering and no cross legs:\footnote{Note that we take all momenta to flow outwards, as per our convention that we have outgoing particles.}
+\begin{center}
+    \btik 
+        \begin{scope}[xshift=-2.5cm]
+            \midarrow (-0.5,0) -- (0.5,0) node [midway, below] {$p$};
+            \midarrow[rotate around={45:(-0.5,0)}] (-0.5,0) -- (-1.5,0) node [below] {$2^-$};
+            \midarrow[rotate around={-45:(-0.5,0)}] (-0.5,0) -- (-1.5,0) node [above] {$1^-$};
+            \midarrow[rotate around={-45:(0.5,0)}] (0.5,0) -- (1.5,0) node [below] {$3^+$};
+            \midarrow[rotate around={45:(0.5,0)}] (0.5,0) -- (1.5,0) node [above] {$4^+$};
+            \node at (2.75,0) {$+$};
+        \end{scope}
+        \begin{scope}[xshift=2.5cm]
+            \midarrow (0,-0.5) -- (0,0.5) node [midway, right] {$p$};
+            \midarrow[rotate around={45:(0,0.5)}] (0,0.5) -- (0,1.5) node [above] {$1^-$};
+            \midarrow[rotate around={-45:(0,0.5)}] (0,0.5) -- (0,1.5) node [above] {$4^+$};
+            \midarrow[rotate around={45:(0,-0.5)}] (0,-0.5) -- (0,-1.5) node [below] {$3^+$};
+            \midarrow[rotate around={-45:(0,-0.5)}] (0,-0.5) -- (0,-1.5) node [below] {$2^-$};
+            \node at (2.5,0) {$+$};
+        \end{scope}
+        \begin{scope}[xshift=7.5cm]
+            \midarrow[thick, rotate around={45:(0,0)}] (0,0) -- (1,0);
+            \midarrow[thick, rotate around={-45:(0,0)}] (0,0) -- (1,0);
+            \midarrow[thick, rotate around={45:(0,0)}] (0,0) -- (-1,0);
+            \midarrow[thick, rotate around={-45:(0,0)}] (0,0) -- (-1,0);
+            \node at (1,1) {$4^+$};
+            \node at (-1,1) {$1^-$};
+            \node at (-1,-1) {$2^-$};
+            \node at (1,-1) {$3^+$};
+        \end{scope}
+    \etik 
+\end{center}
+
+Now recall that the full amplitude is then obtained by dressing $A_4(1^-,2^-,3^+,4^+)$ with the trace $\Tr[T^{a_1}T^{a_2}T^{a_3}T^{a_4}]$ and summing over non-cyclic permutations of external legs. Hence, although the colour-ordered amplitude only has $3$ diagrams, the full amplitude has $3\times 3!=18$ diagrams. This is already a massive simplification, but we can actually further simplify this by a clever choice of reference vectors for the external gluons:
+\be
+\label{eqn:4PointReferenceMomenta}
+    q_1 = q_2 = p_3 \qand q_3 = q_4 = p_2,
+\ee    
+then all polarisation products vanish expect for 
+\be 
+\label{eqn:Epsilon14}
+    \epsilon_1^- \cdot \epsilon_4^+ = \frac{ \la q_4 1\ra [4q_1] }{\la q_4 4\ra [q_11] } = \frac{\la 21 \ra [43]}{\la 24\ra [31]}.
+\ee 
+Then the third diagram (the 4-point diagram) vanishes as it is given by 
+\bse 
+    i (\epsilon_1^-\cdot \epsilon_3^+) (\epsilon_2^-\cdot \epsilon_4^+) = 0.
+\ese 
+
+Now consider the t-channel type diagram and look at the bottom 3-point vertex 
+\begin{center}
+    \btik 
+        \node[left] at (-1.25,0) {\Large{$iV_{23p}^{\mu} \,\, =$}};
+        \midarrow (0,0) -- (0,1) node [above] {$p,\mu$};
+        \midarrow[rotate around={45:(0,0)}] (0,0) -- (-1,0) node [below] {$2^-$};
+        \midarrow[rotate around={-45:(0,0)}] (0,0) -- (1,0) node [below] {$3^+$};
+    \etik 
+\end{center}
+This is given by\footnote{We leave the $\pm$ symbols on the polarisations implicit, they can easily be read off from the diagram.}
+\bse 
+    \begin{split}
+        iV_{23p}^{\mu} & = -i\sqrt{2}\big[ (\epsilon_2\cdot \epsilon_3) p_2^{\mu} + \epsilon_3^{\mu} (p_3\cdot \epsilon_2) + \epsilon_2^{\mu} (p\cdot \epsilon_3) \big] \\
+        & = -i\sqrt{2}\big[ \epsilon_3^{\mu} (q_2\cdot \epsilon_2) + \epsilon_2^{\mu}(-p_2\cdot \epsilon_3 - p_3\cdot \epsilon_3) \big] \\
+        & = -i\sqrt{2} \big[ \epsilon_3 (-q_3\cdot \epsilon_3)\big] \\
+        & = 0,
+    \end{split}
+\ese 
+where we have used our reference momenta choice, \Cref{eqn:4PointReferenceMomenta}, $p=-p_2-p_3$ and
+\bse 
+    \epsilon_2\cdot \epsilon_3 = q_2\cdot \epsilon_2 = q_3 \cdot \epsilon_3 = p_3 \cdot \epsilon_3 = 0.
+\ese 
+So the second diagram also vanishes and we only need to consider the first one! Using the colour-ordered Feynman rules, we are then just left with 
+\bse 
+    A_4(1^-,2^-,3^+,4^+) = iV_{12p}^{\mu} i V_{34-p}^{\nu} \frac{-i\eta_{\mu\nu}}{p^2}.
+\ese
+We then just need to compute the vertex contributions:
+\bse 
+    \begin{split}
+        iV_{12p}^{\mu} & = -i\sqrt{2}\big[ (\epsilon_1\cdot \epsilon_2) p_1^{\mu} + \epsilon_2^{\mu} (p_2\cdot \epsilon_1) + \epsilon_1^{\mu} (p\cdot \epsilon_2)  \big] = -i\sqrt{2}\big[ \epsilon_2^{\mu} (p_2\cdot \epsilon_1) + \epsilon_1^{\mu} (p\cdot \epsilon_2)  \big] \\
+        iV_{34-p}^{\nu} & = -i\sqrt{2}\big[ (\epsilon_3\cdot \epsilon_4) p_3^{\nu} + \epsilon_4^{\nu} (p_4\cdot \epsilon_3) - \epsilon_3^{\nu} (p\cdot \epsilon_4)  \big] = -i\sqrt{2}\big[ \epsilon_4^{\nu} (p_4\cdot \epsilon_3) - \epsilon_3^{\nu} (p\cdot \epsilon_4)  \big],
+    \end{split}
+\ese
+where again we have used $\epsilon_1\cdot \epsilon_2 = 0 = \epsilon_3\cdot \epsilon_4$. Now when we do the $\eta_{\mu\nu}$ contraction, and recall that with our reference momenta, the only non-vanishing contraction is $\epsilon_1\cdot\epsilon_4$ we see that only one term survives and we have 
+\bse 
+    A_4(1^-,2^-,3^+,4^+) = 2 \frac{(p\cdot \epsilon_2)(p_4\cdot \epsilon_3)(\epsilon_1\cdot \epsilon_4)}{p^2}.
+\ese    
+
+We now want to express this in terms of our spinor inner products. Firstly, we have 
+\bse
+    p^2 = (p_1+p_2)^2 = -\la 12 \ra [12].
+\ese 
+Next we have
+\bse 
+    p\cdot \epsilon_2 = -p_1\cdot \epsilon_2 - p_2\cdot \epsilon_2 = - p_1\cdot \epsilon_2,
+\ese 
+and so using\footnote{Putting the helicity labels back on for clarity of where the right-hand sides come from.}
+\bse 
+    \begin{split}
+        p_1\cdot \epsilon_2^- & = \frac{[q_21]\la 12\ra }{\sqrt{2}[2q_2]} = \frac{[31]\la 12\ra }{\sqrt{2}[23]} \\
+        p_4\cdot \epsilon_3^+ & = \frac{\la q_34\ra [43]}{\sqrt{2}\la q_33\ra } = \frac{\la 24\ra [43]}{\sqrt{2}\la 23\ra }.
+    \end{split}
+\ese 
+Putting these together with \Cref{eqn:Epsilon14}, we have 
+\bse 
+    A_4(1^-,2^-,3^+,4^+) = \frac{1}{\la 12\ra [12]} \frac{[31]\la 12\ra }{[23]} \frac{\la 24\ra [43]}{\la 23\ra } \frac{\la 21 \ra [43] }{\la 24\ra [31]}  = \frac{\la 21\ra [43]^2}{[12][23]\la 23 \ra }.
+\ese
+
+This is not so nice, and seems to be in contrast with our Parke-Taylor result, \Cref{eqn:ParkeTaylorMHV}.\footnote{Of course what we are trying to do here is demonstrate that the Parke-Taylor formula holds at least for the 4-point MHV.} How do we make it nicer? Well we can cheat a bit by using that we want it to obey \Cref{eqn:ParkeTaylorMHV}, so we know we need to remove the all the square inner products and we want $\la 12 \ra^4$ in the numerator. 
+
+So how do we achieve this? Well first we note that momentum conservation gives us
+\bse 
+    \la 34 \ra [43] = (p_3+p_4)^2 = (p_1+p_2)^2 = \la 21 \ra [12],
+\ese 
+so if we multiply and divide by $\la 34\ra$, we get (using $\la 21 \ra^2 = \la 12\ra^2$)
+\bse 
+    A_4(1^-,2^-,3^+,4^+) = \frac{\la 12 \ra^2 [43]}{[23]\la 23\ra \la 34\ra}. 
+\ese 
+
+We now need to remove the other $[43]$ and the $[23]$ in the denominator. The trick to note in order to do this is the content of the next exercise.
+\bbox 
+    Using momentum conservation, $p_1+p_2=p_3+p_4$, show that 
+    \bse 
+        [43]\la 41 \ra = - [23] \la 21\ra. 
+    \ese 
+\ebox  
+
+\noindent Using the result from this exercise, we can multiply and divide by $\la 41 \ra$ to obtain 
+\be 
+\label{eqn:A4MHVResult}
+    A_4(1^-,2^-,3^+,4^+) = \frac{\la 12\ra^3}{\la 23 \ra \la 34\ra \la 41 \ra} = \frac{\la 12\ra^4}{\la 12 \ra \la 23 \ra \la 34\ra \la 41 \ra},
+\ee 
+which agrees exactly with the Parke-Taylor formula. 
+
+\section{Photon-Decoupling Identity \& Schowten Identity}
+
+Great, we have shown that the Parke-Taylor formula holds for the 4-point amplitude by explicitly calculating $A(1^-,2^-,3^+,4^+)$. We saw it was quite a lot of work in order to obtain this, so it would be extremely useful if we could relate this result to other MHV 4-point amplitudes. That is, we want to use the result above to write down the result for $A_4(1^-,2^+,3^-,4^+)$. 
+
+Again, if we accept the Parke-Taylor identity as true, this is trivial --- simply change the values for $i,j$ in \Cref{eqn:ParkeTaylorMHV} --- however we want to show that this holds explicitly. In order to do that, we introduce the \textit{photon-decoupling identity}
+\mybox{
+    \be 
+    \label{eqn:PhotonDecoupling}
+        A(1,2,3,...,n) + A(2,1,3,...,n) + A(2,3,1,...,n) + ... + A(2,3,...,n,1) = 0,
+    \ee 
+}
+\noindent which can be remembered using the mnemonic "migrate the $1$ through". 
+
+\bbox 
+    Prove \Cref{eqn:PhotonDecoupling}. \textit{Hint: Use the fact that pure gluon tree amplitudes can be expressed in the following colour-decomposed form}
+    \bse 
+        \cA_n = g^{n-2} \sum_{\substack{\text{non-cyclic} \\ \text{perms}}} \Tr[T^{a_1} ... T^{a_n}] A(1,...,n),
+    \ese 
+    \textit{and then let $T^{a_1}=\b1$.}
+\ebox 
+
+\br 
+    The above exercise is one set on the course so I don't want to expand on the proof any further, but this remark is included to maybe clear up some potential confusion. Setting $T^{a_1}$ to be the identity corresponds to making one of the gluons into a photon, which is why \Cref{eqn:PhotonDecoupling} vanishes: photons and gluons do not couple. This is where the name "photon-decoupling" comes from. Now it might seem strange to then say that the result must also hold when all the particles are gluons (i.e. there is no photon), but what we have to notice is that \Cref{eqn:PhotonDecoupling} is expressed in terms of the colour-ordered amplitudes, which know \textit{nothing} about the colour structure. That is the $A(1,...,n)$ have no way of knowing if the entries are photons or gluons. 
+\er 
+
+Ok so using the photon-decoupling identity we have 
+\bse 
+    \begin{split}
+        A(1^-,2^+,3^-,4^+) & = - A(1^-,2^+,4^+,3^-) - A(1^-,4^+,2^+,3^-) \\
+        & = - A(3^-,1^-,2^+,4^+) - A(3^-,1^-,4^+,2^+,3^-) \\
+        & = -\bigg( \frac{ \la 13\ra^4 }{\la 12 \ra \la 24 \ra \la 43\ra \la 31\ra } + \frac{ \la 13\ra^4 }{\la 14 \ra \la 42 \ra \la 23\ra \la 31\ra } \bigg) \\
+        & = \frac{\la 13 \ra^3}{\la 24\ra} \bigg( \frac{1}{\la 12\ra \la 43\ra } - \frac{1}{\la 14\ra \la 23 \ra} \bigg) \\
+        & = \frac{\la 13 \ra^3}{\la 24\ra} \bigg( \frac{\la 14\ra \la 23\ra - \la 12\ra \la 43\ra }{\la 12\ra \la 43\ra \la 14\ra \la 23\ra }  \bigg) \\
+        & = \frac{\la 13 \ra^3}{\la 24\ra} \bigg( \frac{\la 14\ra \la 23\ra + \la 12\ra \la 34\ra }{\la 12\ra \la 43\ra \la 14\ra \la 23\ra }  \bigg)
+    \end{split}
+\ese
+where the second line follows from the cyclicity of the colour-ordered amplitudes and then we have used our result from above.
+
+This isn't quite what we want and it's not obvious at this point how to make it more Parke-Taylor-like. Indeed we now need another, very useful, identity known as the \textit{Schowten identity}
+\mybox{
+    \be 
+    \label{eqn:Schowten}
+        \la ij \ra \l_k + \la jk \ra \l_i + \la ki \ra \l_j = 0.
+    \ee 
+}
+
+\bbox
+    Prove the Schowten identity, \Cref{eqn:Schowten}. \textit{Hint: Note that the $\l$s are 2-component objects, so can think of $\l_i$ and $\l_j$ as a basis for $\l_k$.}\footnote{Again this is a exercise on the course, and I can't add much more of a hint without writing the answer. If any readers are still confused, feel free to drop me an email.}
+\ebox 
+
+Using the Schowten identity, we have 
+\bse 
+    \la 14 \ra \la 23 \ra + \la 12 \ra \la 34 \ra = - \la 13 \ra \la 42 \ra = \la 13 \ra \la 24 \ra,
+\ese 
+which if we plug in to the expression above gives us 
+\bse 
+    A(1^-,2^+,3^-,4^+) = \frac{\la 13\ra^4 }{\la 12 \ra \la 23 \ra \la 34\ra \la 41 \ra },
+\ese 
+which is in agreement with the Parke-Taylor identity. 
+
+So we have managed to prove the Parke-Taylor identity for $n=3$ and $n=4$. Of course this does not prove the Parke-Taylor identity in general. For higher $n$-point functions using Feynman diagrams is not feasible. We now move on to prove a recursion relation that will allow us to prove the Parke-Taylor formula inductively.  

@@ -1,0 +1,331 @@
+\chapter{BCFW Recursion}
+
+As we just said, we now want to obtain some kind of recursive relation that will allow us to compute higher order amplitudes. As the name of this chapter suggests, such a recursive relation is known as the Britto–Cachazo–Feng–Witten (BCGW) recursion relation. 
+
+So we want to compute a tree-level $n$-point amplitude $A_n$. The method to do this seems slightly strange at first, but hopefully will be clear as we move forward. The idea is to deform legs $1$ and $n$ in such a way that preserves momentum conservation, namely 
+\be 
+\label{eqn:p1pnDeformation}
+    \begin{split}
+        p_1 \to \widehat{p}_1(z) &:= p_1 - zq \\
+        p_n \to \widehat{p}_n(z) &:= p_n + zq 
+    \end{split}
+\ee 
+where $z\in \C$ and $q$ is some other momentum (i.e. it is a four component object that we can contract with the other momenta $p_i$). It's clear that we can preserved momentum conservation as $\widehat{p}_1+\widehat{p}_n = p_1+p_n$. Now if we want to require $\widehat{p}_1^2 = 0 = \widehat{p}_n^2$ (i.e. they are on-shell momenta) then we must impose 
+\be 
+\label{eqn:Hatp2=0Condition}
+    q^2 = q \cdot p_1 = q \cdot p_n = 0.
+\ee 
+The next important thing to note is that, because $z\in\C$, the momenta are complex and so we get non-trivial $3$-point amplitudes. This is important as, as we will see, all higher point amplitudes are made up from the $3$-point amplitude (i.e. we have a recursion relation). 
+
+Doing the deformation \Cref{eqn:p1pnDeformation}, we obtain the deformed amplitude $\widehat{A}_n(z)$. The question we now want to ask is "what are its analytical properties?" It is the sum of deformed Feynman diagrams, and so it is a rational function\footnote{A function $f(x)$ is said to be rational if it can be written in the form $f(x) = \frac{P(x)}{Q(x)}$, where $P(x)$ and $Q(x)$ are polynomials in $x$, with $Q(x)$ not being the zero function.} of $z$. Moreover, $\widehat{A}_n(z=0)=A_n$ only has poles when denominators of Feynman propagators become zero, i.e. the virtual exchange particles go on-shell. It follows from this that $\widehat{A}(z)$ only has poles at values of $z$ for which the deformed propagators go on-shell. Near such poles, the amplitude factorises into a product of two on-shell deformed amplitudes, which we denote $\widehat{A}_L(z_i)$ and $\widehat{A}_R(z_i)$ (for "left" and "right"). We depict the idea diagrammatically, in order to try help further explain why this is the case. 
+
+\begin{center}
+    \btik 
+        \begin{scope}[xshift=-3cm]
+            \node at (-3.25,0) {\Large{$\lim$}};
+            \node at (-3.25,-0.5) {$z\to z_i$};
+            \draw[thick] (0,0) circle [radius=0.75cm];
+            \midarrow[rotate around={-45:(0,0)}] (0.75,0) -- (1.75,0) node [right] {$\widehat{n}$};
+            \midarrow[rotate around={45:(0,0)}] (0.75,0) -- (1.75,0) node [right] {$5$};
+            \midarrow[rotate around={90:(0,0)}] (0.75,0) -- (1.75,0) node [above] {$4$};
+            \midarrow[rotate around={-45:(0,0)}] (-0.75,0) -- (-1.75,0) node [left] {$3$};
+            \midarrow (-0.75,0) -- (-1.75,0) node [left] {$2$};
+            \midarrow[rotate around={45:(0,0)}] (-0.75,0) -- (-1.75,0) node [left] {$\widehat{1}$};
+            \node at (1.25,0.1) {\Large{$\vdots$}};
+            \node at (0,0) {$\widehat{A}_n(z)$};
+        \end{scope}
+        \node at (-0.25,0) {\Large{$=$}};
+        \begin{scope}[xshift=3cm]
+            \draw[thick] (0,0) circle [radius=0.75cm];
+            \midarrow (0,-0.75) -- (0,-1.75) node [below] {$\widehat{1}$};
+            \midarrow[rotate around={45:(0,0)}] (-0.75,0) -- (-1.75,0) node [left] {$2$};
+            \midarrow (-0.75,0) -- (-1.75,0) node [left] {$3$};
+            \midarrow (0,0.75) -- (0,1.75) node [above] {$i-1$};
+            \node[rotate around={45:(0,0)}] at (-0.9,0.9) {\Large{$\dots$}};
+            \node at (0,0) {$\widehat{A}_L(z_i)$};
+            %
+            \begin{scope}[xshift=3cm]
+                \draw[thick] (0,0) circle [radius=0.75cm];
+                \midarrow (0,-0.75) -- (0,-1.75) node [below] {$\widehat{n}$};
+                \midarrow[rotate around={-45:(0,0)}] (0.75,0) -- (1.75,0) node [right] {$n-1$};
+                \midarrow (0.75,0) -- (1.75,0) node [right] {$n-2$};
+                \midarrow (0,0.75) -- (0,1.75) node [above] {$i$};
+                \node[rotate around={-45:(0,0)}] at (0.9,0.9) {\Large{$\dots$}};
+                \node at (0,0) {$\widehat{A}_R(z_i)$};
+            \end{scope}
+            \midarrow (2.25,0) -- (0.75,0) node [midway, below] {$\widehat{P}_i(z)$};
+        \end{scope}
+    \etik 
+\end{center}
+\noindent where 
+\be 
+\label{eqn:HatPi}
+    \widehat{P}_i(z) := (\widehat{p}_1 + p_2 + ... + p_{i-1}) = P_i - zq
+\ee 
+where we have also defined 
+\bse 
+    P_i := \sum_{j=1}^{i-1} p_j.
+\ese 
+It is important to note the notation used: the subscript on the capital $\widehat{P}_i/P_i$ tells us where the sum ends, it is \textit{not} the momentum of the $i$-th leg, which is lowercase $p_i$. $\widehat{P}_i$ is the momentum of the deformed propagator. This is hopefully clear from the sum expression for $P_i$. We will clarify what $z_i$ is in a moment.
+
+\br 
+    We should clarify that $i\in \{3,...,n-1\}$,\footnote{As otherwise either $\widehat{A}_L(z_i)$ or $\widehat{A}_R(z_i)$ only contains one particle and so is not a proper amplitude} and so the labelling on the right-hand diagram is simply illustrative (i.e. the leg $3$ could actually belong to $\widehat{A}_R(z_i)$, for example). 
+\er 
+
+Ok so why does having our deformed propagator cause the amplitude to split? Well the pedagogical answer goes as follows: when the deformed propagator goes on shell it essentially behaves like an external particle, and so we can view it as such. However it is not actually external (it is not asymptotically free), but instead it connects two other amplitudes with genuine on-shell external legs. In other words we can almost imagine process $\widehat{A}_R(z_i)$ happening, with $\widehat{P}_i(z)$ being an external particle. This particle then becomes an incoming particle in the, otherwise completely separate, amplitude $\widehat{A}_L(z_i)$. 
+
+It is hopefully clear that we must view $\widehat{P}_i(z)$ as an outgoing particle for one amplitude and ingoing for the other, otherwise we would break momentum conservation. Similarly it follows that $\widehat{1}$ and $\widehat{n}$ must be in different subamplitudes (as in the diagram above), as if they appeared in the same subamplitude, the propagator will not be deformed and therefore will not pick up a pole (i.e. will not become "like an external particle"). 
+
+With the idea hopefully cleared up, let's now look at this in a bit more detail. Squaring \Cref{eqn:HatPi}, we get
+\bse 
+    \widehat{P}_i^2(z) = P_i^2 - 2zP_i \cdot q = -2P_i\cdot q\bigg( z - \frac{P_i^2}{2P_i\cdot q} \bigg).
+\ese 
+Now we want $\widehat{P}_i^2(z=z_i)=0$ --- i.e. it goes on-shell at $z=z_i$ --- and so we can conclude that
+\mybox{ 
+    \be 
+    \label{eqn:zi}
+        z_i := \frac{P_i^2}{2P_i\cdot q}
+    \ee 
+}
+
+For colour-ordered amplitudes $P_i$ is always given by the sum of adjacent momenta as written above, but more generally $\widehat{P}_i$ just corresponds to the sum of external momenta in $\widehat{A}_L$. This is just the statement of momentum conservation: we have $\widehat{P}_i$ in and the sum $\widehat{p}_1 + ... + p_{i-1}$ out. 
+
+Ok let's look at the subamplitudes in a bit more detail. For each factorisation we must actually sum over all on-shell states propagating between $\widehat{A}_R$ and $\widehat{A}_L$. For gluons this corresponds to a sum over helicities, $s$, which follows from 
+\bse 
+    \eta_{\mu\nu} = -\sum_{s=\pm1} \epsilon_s^{\mu} \epsilon_{-s}^{\nu}.
+\ese 
+So we are left with
+\be 
+\label{eqn:HatAnProduct}
+    \begin{split}
+        \lim_{z\to z_i} \widehat{A}_n(z) = \frac{1}{z-z_i}\bigg(-\frac{1}{2P_i\cdot q}\bigg) \sum_{s=\pm 1} & \widehat{A}_L\big( \widehat{1}(z_i), 2, ... , i-1, -\widehat{P}_i(z_i)^{-s}\big) \\
+        &\times \widehat{A}_R\big( +\widehat{P}_i(z_i)^s, i, ... , n-1, -\widehat{n}(z_i)\big),
+    \end{split}
+\ee 
+where we have used 
+\bse 
+    \frac{1}{\widehat{P}_i^2} = \frac{1}{z-z_i}\bigg(-\frac{1}{2P_i\cdot q}\bigg).
+\ese 
+Also note that $\widehat{P}_i$ appears in $\widehat{A}_L$ with a minus sign as it is \textit{ingoing} there and our convention is that all particles are outgoing. For the same reason we put it to the power $-s$, as we flip the helicity when we go from outgoing to incoming. Similarly $\widehat{P}_i$ appears in $\widehat{A}_R$ with a positive sign and a positive power of $s$.
+
+In summary, after deforming the amplitude, the residues of the poles correspond to products of lower point amplitudes, the $\widehat{A}_L$ and $\widehat{A}_R$. By summing over all residues, we can then reconstruct the deformed amplitude from lower-point amplitudes. The original amplitude is then obtain by setting $z=0$. This can be proven using Cauchy's theorem. In particular suppose that 
+\be
+\label{eqn:limZInftyHatA}
+    \lim_{z\to\infty} \widehat{A}_n(z) = 0,
+\ee 
+then the following contour integral vanishes
+\bse 
+    \oint_{z=\infty} \frac{dz}{2\pi i} \frac{\widehat{A}_n(z)}{z} = 0,
+\ese
+where the limit on the integration means we take the contour over an infinite radius circle centered around the origin of the complex $z$ plane. Alternatively, we could define $w := 1/z$ and then take the contour around a small circle around the origin $w=0$, and the integral simply implies that $\widehat{A}_n(w=0)=0$. 
+
+Why is this useful? Well \Cref{eqn:HatAnProduct} tells us that the contour integral also corresponds to the sum over residues of poles inside the contour, notably $z=0$, and the poles where $\widehat{A}_n(z)$ factorises into lower-point amplitudes:
+\bse 
+    0 = \widehat{A}_n(z=0) + \sum_{i=3}^{n-1} \frac{1}{z_i} \bigg(-\frac{1}{2P_i\cdot q}\bigg) \sum_{s=\pm 1} \widehat{A}_L^{-s}(z_i) \widehat{A}_r^s(z_i),
+\ese 
+where the sum over $i$ accounts for the different factorisation channels (i.e. the different distribution of the legs between $\widehat{A}_L$ and $\widehat{A}_R$). Then using \Cref{eqn:zi} and $\widehat{A}_n(z=0) = A_n$, we finally conclude 
+\mybox{
+    \be 
+    \label{eqn:BCFWRecursion}
+        A_n = \sum_{i=3}^{n-1} \sum_{s=\pm1} \widehat{A}_L^{-s}(z_i) \frac{1}{P_i^2} \widehat{A}_R^s(z_i).
+    \ee 
+}
+\noindent This is the BCFW recursion relation and it tells us that the undeformed amplitude can be computed by summing over products of deformed lower point on-shell amplitudes times undeformed propagators. The deformation parameter of each term corresponds to the value of $z$ for which the deformed propagator goes on-shell. In this way we can recursively compute higher point amplitudes from lower point amplitudes. Note that although the $3$-point amplitude is unphysical itself (it vanishes when we impose our real momenta condition), it is the building block for \textit{all} higher point amplitudes. In other words, the BCFW relation allows us to compute the entire $S$-matrix given only the $3$-point amplitude. 
+
+\section{Comments On Generality Of BCFW}
+
+Although we have focused on colour ordered Yang-Mills amplitudes (i.e. gluons), the BCFW recursion relation can be applied much more generally. Indeed note that the only assumptions we have made is the existence of a Feynman diagram expansion and \Cref{eqn:limZInftyHatA}. This means that, in particular, the BCFW recursion relation can be applied to gravity! This is particularly powerful as the Einstein-Hilbert action has an infinite number of Feynman vertices,\footnote{See the effective field theory section of QFT II to see why.} which makes standard Feynman diagram calculations very complicated. Using the BCFW recursion relation only the $3$-point amplitude needs to be known, and this can be deduced from little-group scaling and locality (as we did above). This last point is very important as it tells us we don't even need to know the Lagrangian of the theory!
+
+Furthermore, the BCFW recursion relation holds in any spacetime dimension $d\geq 4$. In these lectures we have of course focused on $d=4$, as here we can use our spinor techniques. In particular we can define the deformation as follows: 
+\bse 
+    \l_1 \to \widehat{\l}_1 := \l_1 - z\l_n \qand \widetilde{\l}_n \to \widehat{\widetilde{\l}}_n := \widetilde{\l}_n + z\widetilde{\l}_1,
+\ese 
+so that 
+\bse 
+    \begin{split}
+        \widehat{p}_1^{\dot{\a}\a}(z) & =  \widehat{\widetilde{\l}}_1^{\dot{\a}} \widehat{\l}_1^{\a} = \widetilde{\l}_1^{\dot{\a}} (\l_1 - z\l_n)^{\a} = p_1^{\dot{\a}\a} - z \widetilde{\l}_1^{\dot{\a}} \l_n^{\a}, \qand \\
+        \widehat{p}_n^{\dot{\a}\a}(z) & = \widehat{\widetilde{\l}}_n^{\dot{\a}} \widehat{\l}_n^{\a} = (\widetilde{\l}_n +z \widetilde{\l}_1)^{\dot{\a}} \l_n^{\a} = p_n^{\dot{\a}\a} + z \widetilde{\l}_1^{\dot{\a}}\l_n^{\a},
+    \end{split}
+\ese
+so if we define 
+\bse 
+    q^{\dot{\a}\a} := \widetilde{\l}_1^{\dot{\a}}\l_n^{\a},
+\ese
+we have 
+\bse 
+    \widehat{p}_1 = p_1 - zq \qand \widehat{p}_n = p_n + zq,
+\ese 
+which is exactly our deformation, \Cref{eqn:p1pnDeformation}. We call this deformation a "$\la 1n]$ shift".
+
+Given this deformation, under what circumstances does \Cref{eqn:limZInftyHatA} hold? To see this, consider deforming the $4$-point MHV amplitude $A_4(1^-,2^-,3^+,4^+)$. Suppose we do a $\la 1^-2^-]$ shift, then from \Cref{eqn:A4MHVResult} we have 
+\bse 
+    \widehat{A}_4^{--} = \frac{\la \widehat{1} \widehat{2}\ra^3 }{\la \widehat{2}3 \ra \la 34 \ra \la 4\widehat{1}\ra },
+\ese 
+where the superscript is meant to indicate we are defomring the negative helicity particles. Now note that 
+\bse 
+    \la \widehat{1}\widehat{2} \ra = \big(\bra{1} - z\bra{2}\big)\ket{2} = \la 12 \ra
+\ese 
+where we have used $\la 22 \ra =0$. Similarly we have 
+\bse 
+    \la 4 \widehat{1} \ra = \la 41 \ra - z \la 42 \ra. 
+\ese
+Then using that $\widehat{2}$ only effects the tilded $\widetilde{\l}_2$ and that the angular $\la ij \ra$ is the inner product w.r.t. untilded $\l_i$ and $\l_j$ we have $\la \widehat{2} 3 \ra = \la 23 \ra$. So in total we have 
+\bse 
+    \widehat{A}_4^{--} \sim \frac{1}{z},
+\ese
+which vanishes in the limit $z\to\infty$, and so \Cref{eqn:limZInftyHatA} is obeyed.
+
+Similarly a $\la 3^+ 4^+ ]$ shift will result in 
+\bse 
+    \widehat{A}_4^{++} \sim \frac{1}{z},
+\ese 
+and a $\la 4^+ 1^-]$ shift gives 
+\bse 
+    \widehat{A}^{+-}_4 \sim \frac{1}{z}. 
+\ese 
+However if we consider a $\la 1^- 4^+]$ shift then we have 
+\bse 
+    \widehat{A}^{-+}_4 = \frac{\la \widehat{1}2\ra^3}{\la 23 \ra \la 3\widehat{4}\ra \la\widehat{4}\widehat{1}\ra }
+\ese 
+and 
+\bse 
+    \la \widehat{1}2 \ra = \la 12 \ra - z\la 42\ra, \qquad \la 3 \widehat{4}\ra = \la 34 \ra \qand \la \widehat{1}\widehat{4} \ra = \la 14 \ra,
+\ese 
+so in total 
+\bse 
+    A_4^{-+} \sim z^3,
+\ese
+which obviously doesn't obey \Cref{eqn:limZInftyHatA}. 
+
+Hence we see that the BCFW recursion relation applies for $\la -- ]$, $\la ++ ]$ and $\la +-]$ shifts but \textit{not} for a $\la -+]$ shift. Although we have only showed this for $n=4$, it turns out this result holds for any $n$ and any MHV degree.\footnote{For a proof see \href{https://arxiv.org/pdf/0801.2385.pdf}{arXiv:0801.2385}.}
+
+\section{Inductive Proof Of Parke-Taylor Formula}
+
+As we said at the end of the last chapter, our motivation for introducing the BCFW recursion relation is so that we can prove the Parke-Taylor identity for $n>4$ point functions by induction. This is exactly what we do now. 
+
+Consider an $n$-point MHV amplitude, $A(1^-,2^+,...,(n-1)^+,n^-)$, and assume that the Parke-Taylor formula holds for all lower point MHV amplitudes. We now perform a $\la 1^- n^-]$ shift. The important thing to notice is that there are only two types of diagrams can contribute, namely:
+\begin{center}
+    \btik 
+        \begin{scope}
+            \draw[thick] (0,0) circle [radius=0.75cm];
+            \midarrow[rotate around={-45:(0,0)}] (0,-0.75) -- (0,-1.75) node [below] {$\widehat{1}^-$};
+            \midarrow[rotate around={45:(0,0)}] (0,0.75) -- (0,1.75) node [above] {$2^+$};
+            \node at (0,0) {$\widehat{A}_L$};
+            %
+            \draw[thick] (3,0) circle [radius=0.75cm];
+            \midarrow[rotate around={45:(3,0)}] (3,-0.75) -- (3,-1.75) node [right] {$\widehat{n}^-$};
+            \midarrow[rotate around={75:(3,0)}] (3,-0.75) -- (3,-1.75) node [right] {$(n-1)^+$};
+            \midarrow[rotate around={-35:(3,0)}] (3,0.75) -- (3,1.75) node [above] {$3^+$};
+            \node[rotate around={-70:(0,0)}]  at (4.1,0.4) {\Large{$\dots$}};
+            \node at (3,0) {$\widehat{A}_R$};
+            \midarrow (2.25,0) -- (0.75,0) node [midway, below] {$\widehat{P}$};
+            \node at (1,0.25) {$+$};
+            \node at (2,0.25) {$-$};
+        \end{scope}
+        \begin{scope}[yshift=-5cm]
+            \draw[thick] (0,0) circle [radius=0.75cm];
+            \midarrow[rotate around={-45:(0,0)}] (0,-0.75) -- (0,-1.75) node [below] {$\widehat{1}^-$};
+            \midarrow[rotate around={-75:(0,0)}] (0,-0.75) -- (0,-1.75) node [left] {$2^+$};
+            \midarrow[rotate around={35:(0,0)}] (0,0.75) -- (0,1.75) node [above] {$(n-2)^+$};
+            \node[rotate around={70:(0,0)}]  at (-1.1,0.4) {\Large{$\dots$}};
+            \node at (0,0) {$\widehat{A}_L$};
+            %
+            \draw[thick] (3,0) circle [radius=0.75cm];
+            \midarrow[rotate around={45:(3,0)}] (3,-0.75) -- (3,-1.75) node [right] {$\widehat{n}^-$};
+            \midarrow[rotate around={-45:(3,0)}] (3,0.75) -- (3,1.75) node [above] {$(n-1)^+$};
+            \node at (3,0) {$\widehat{A}_R$};
+            \midarrow (2.25,0) -- (0.75,0) node [midway, below] {$\widehat{P}$};
+            \node at (1,0.25) {$-$};
+            \node at (2,0.25) {$+$};
+        \end{scope}
+    \etik 
+\end{center}
+
+\noindent The reason we only have these two diagrams is because, as we showed before (\Cref{eqn:AmppmNPoint}), 
+\bse 
+    A_n(-, +, +, ..., +) = 0 \qquad \forall n >3,
+\ese
+and every other diagram would contain a subamplitude of exactly that form. 
+
+Now each of the diagrams above contain a $\overline{\text{MHV}_3}$ amplitude (the $\widehat{A}_L$ in the first one and the $\widehat{A}_R$ in the second one). Then recall that for such a amplitude we have all the $\l$s proportional, and since we are shifting $\l_1$ but not $\l_n$ (we shift $\widetilde{\l}_n$), it will be possible to choose $z$ such that the $3$-point kinematics is satisfied by $\widehat{A}_L$ in the first diagram. However, in general the $3$-point kinematics will \textit{not} be satisfied by $\widehat{A}_R$ in the second diagram. This is just because the $\widehat{A}_L$ contains $\l_1$ but $\widehat{A}_R$ contains $\l_n$, and we can shift the former but not the latter. This tells us that the second diagram must vanish for generic kinematics. We can verify this more explicitly. 
+
+For the second diagram we have\footnote{Note we have a minus sign here as $\widehat{P}$ is given by the external momenta of $\widehat{A}_L$, which is $\widehat{p}_1 + p_2 + ... + p_{n-2}$. Then momentum conservation, $\widehat{p}_1 + p_2 + ... + p_{n-1} + \widehat{p}_n=0$ gives us the minus sign.}
+\bse
+    \widehat{P}(z) = -\big(\widehat{p}_n(z) + p_{n-1}\big) = -\big(p_n + p_{n-1}\big) - zq
+\ese 
+with $q= \widetilde{\l}_1 \l_n$ from before. Therefore, denoting the pole value as $z_*$, we have 
+\bse 
+    z_* = \frac{(p_{n-1}+p_n)^2}{-2(p_{n-1}+p_n)\cdot q} = - \frac{ \la (n-1)n \ra [n(n-1)] }{\la (n-1)n\ra [1(n-1)]} = - \frac{[n(n-1)]}{[1(n-1)]}. 
+\ese 
+From here we have 
+\bse 
+    \begin{split}
+        -\widehat{P}(z_*) & = \widetilde{\l}_{n-1}\l_{n-1} + \widetilde{\l}_n \l_n - \frac{[n(n-1)]}{[1(n-1)]}\widetilde{\l}_1 \l_n \\
+        & = \widetilde{\l}_{n-1}\l_{n-1} + \bigg(\widetilde{\l}_n + \frac{[(n-1)n]}{[1(n-1)]}\widetilde{\l}_1\bigg) \l_n \\
+        & = \widetilde{\l}_{n-1}\l_{n-1} + \bigg(\frac{\widetilde{\l}_n[1(n-1)] + [(n-1)n]\widetilde{\l}_1}{[1(n-1)]}\bigg) \l_n \\
+        & = \widetilde{\l}_{n-1}\l_{n-1} + \frac{[1n]}{[1(n-1)]} \widetilde{\l}_{n-1}\l_n \\
+        & = \widetilde{\l}_{n-1}\bigg( \l_{n-1} +\frac{[1n]}{[1(n-1)]}\l_n\bigg),
+    \end{split}
+\ese 
+where we have used the Schowten identity 
+\bse 
+    [1(n-1)]\widetilde{\l}_n + [(n-1)n]\widetilde{\l}_1 = [1n]\widetilde{\l}_{n-1}.
+\ese 
+We can write this all in terms of $\l$s using $\widehat{P}= \widetilde{\l}_{\widehat{P}} \l_{\widehat{P}}$:
+\be 
+\label{eqn:LambdaHatP}
+    -\widetilde{\l}_{\widehat{P}} \l_{\widehat{P}} =  \widetilde{\l}_{n-1}\bigg( \l_{n-1} +\frac{[1n]}{[1(n-1)]}\l_n\bigg).
+\ee 
+Now from \Cref{eqn:A++-Final} we have 
+\bse 
+    \widehat{A}_R(z_*) = - \frac{[\widehat{P}(n-1)]^3}{[(n-1)\widehat{n}][\widehat{n}\widehat{P}]},
+\ese    
+but then from \Cref{eqn:LambdaHatP} we have 
+\bse 
+    [\widehat{P}(n-1)] \sim [(n-1)(n-1)] = 0,
+\ese
+and 
+\bse 
+    \begin{split}
+        [\widehat{n}\widehat{P}] \sim [\widehat{n}(n-1)] = \big([n| +z_*[1|\big)|n-1] = [n(n-1)] - \frac{[(n-1)n]}{[1(n-1)]}[1(n-1)] = 0
+    \end{split}
+\ese 
+which also gives us $[(n-1)\widehat{n}]=0$, and so 
+\bse 
+    \widehat{A}_R(z_*) = \frac{0^3}{0^2} = 0,
+\ese 
+and so the second diagram vanishes, as claimed. 
+
+So we only need to consider the first diagram above\footnote{Hopefully the initial motivating simplifications that arise from using this approach to amplitudes has become clear at this point.} which gives us
+\bse 
+    A_n(1^-,2^+,...,(n-1)^+,n^-) = - \frac{[2(-\widehat{P})]^3}{[-\widehat{P}\widehat{1}][\widehat{1}2]} \frac{1}{(p_1+p_2)^2} \frac{\la \widehat{n}\widehat{P}\ra^3}{\la \widehat{P}3\ra ... \la (n-1)\widehat{n}\ra}.
+\ese
+Now let 
+\bse 
+    \l_{-\widehat{P}} = \l_{\widehat{P}} \qand \widetilde{\l}_{-\widehat{P}} = - \widetilde{\l}_{\widehat{P}} \qquad \implies \qquad \widetilde{\l}_{-\widehat{P}} \l_{-\widehat{P}} = - \widetilde{\l}_{\widehat{P}} \l_{\widehat{P}}.
+\ese 
+Then using 
+\bse 
+    |\widehat{P}] \la \widehat{P}| = \widetilde{\l}_{\widehat{P}}^{\dot{\a}} \l_{\widehat{P}}^{\a} = \widehat{P} = \widehat{p}_1+p_2 = | \widehat{p}_1]\la\widehat{p}_1| + |p_2] \la p_2|,
+\ese 
+we have 
+\bse 
+    [2(-\widehat{P})]\la \widehat{n}\widehat{P}\ra = [2\widehat{P}]\la \widehat{P}\widehat{n}\ra = [2| \big(\widehat{p}_1]\la\widehat{p}_1| + |p_2] \la p_2|\big) \ket{\widehat{n}} = [21]\la 1 n\ra, 
+\ese
+where we have also used $\ket{\widehat{n}}=\ket{n}$ and $\la \widehat{1}n\ra = \la 1n\ra$. Similarly we have 
+\bse 
+    [-\widehat{P}\widehat{1}]\la \widehat{P}3 \ra = [\widehat{1}\widehat{P}] \la \widehat{P} 3\ra = [\widehat{1}| \big( \widehat{p}_1]\la\widehat{p}_1| + |p_2] \la p_2| \big) \ket{3} = [12]\la 23\ra. 
+\ese 
+Then simply from $[\widehat{1}| = [1|$ and $\ket{\widehat{n}}=\ket{n}$, we also have
+\bse 
+    [\widehat{1}2] = [12] \qand \la (n-1)\widehat{n}\ra = \la (n-1)n\ra.
+\ese 
+Finally, we have 
+\bse 
+    (p_1 + p_2)^2 = \la 12 \ra [21],
+\ese 
+so in total we have 
+\bse 
+    A_n(1^-,2^+,...,(n-1)^+,n^-) = \frac{\la n1\ra^3 }{\la 12 \ra \la 23 \ra ... \la (n-1)n\ra },
+\ese 
+which is the Parke-Taylor formula, \Cref{eqn:ParkeTaylorMHV}.\footnote{Note that in the numerator we have $\la n1\ra$, this accounts for the minus sign missing from cancelling $\la 1n\ra^4/\la n1\ra = -\la 1n\ra^3$ from \Cref{eqn:ParkeTaylorMHV}.}

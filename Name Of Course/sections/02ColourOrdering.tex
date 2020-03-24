@@ -1,0 +1,300 @@
+\chapter{Colour-Ordering}
+
+As we made clear before starting the calculation, the above results are for \textit{abelian} gauge theories, i.e. QED. We obviously now want to ask the question of how this translates to non-abelian theories in order to study QCD. Indeed QCD will be the main focus of this course, for the simple reason that we know QCD amplitudes are tedious to calculate from the Feynman diagram approach (mainly due to the gluon self interactions). 
+
+The polarisation story from the QED case before will all follow through, so all we really need to consider here is the colour part of it. The idea is to split the amplitude into a colour part and a kinematical part and then just put them together in the end. 
+
+\section{Setting Up The Lagrangian}
+
+So how do we do this? Well as always we `promote' our gauge fields $A_{\mu}$ to be matrices 
+\bse 
+    {(A_{\mu})_i}^j = A_{\mu}^a {(T^a)_i}^j
+\ese
+where $T^a$ are the generators of $SU(N)$ and $a \in \{1,2,...,N^2-1\}$ is an adjoint index. We shall use the convention\footnote{Note this is different to the other standard convention $\Tr[T^aT^b]=\frac{1}{2}\del^{ab}$. For $SU(2)$ the one used here corresponds to using $T^a = \frac{1}{\sqrt{2}}\sig^a$, where $\sig^a$ are the Pauli matrices, while the other convention uses $\tau^a = \frac{1}{2}\sig^a$. Similarly for other $SU(N)$s with the Pauli matrices respectively replaced.}
+\be
+\label{eqn:TraceTaTb}
+    \Tr[T^aT^b] = \del^{ab}.
+\ee 
+This allows us to extract the individual $A_{\mu}^a$s simply via 
+\be 
+\label{eqn:AmuaFromAmu}
+    A_{\mu}^a = \Tr[A_{\mu}T^a].
+\ee 
+The commutator of our generators obey 
+\bse 
+    [T^a, T^b] = i\sqrt{2} f^{abc}T^c,
+\ese
+where the perhaps unfamiliar $\sqrt{2}$ factor comes from using convention \Cref{eqn:TraceTaTb}.
+
+Our Lagrangian now simply becomes\footnote{Note this is actually the same as for the abelian case; in that case there is only one term in the trace so we don't need to write it.}
+\bse 
+    \cL = -\frac{1}{4}\Tr[ F_{\mu\nu}F^{\mu\nu}]
+\ese 
+with 
+\bse 
+    F_{\mu\nu} = \p_{\mu}A_{\nu} - \p_{\nu}A_{\mu} - \frac{ig}{\sqrt{2}}[A_{\mu},A_{\nu}] 
+\ese
+where we explicitly see the non-ableian term, the commutator. We can write this in terms of $F_{\mu\nu}^a$ using the structure constants
+\bse 
+    F_{\mu\nu}^a = \p_{\mu}A_{\nu}^a - \p_{\nu}A_{\mu}^a + gf^{abc}A^b_{\mu}A^c_{\nu}. 
+\ese 
+If we introduce the covariant derivative 
+\bse 
+    D_{\mu} = \p_{\mu} - \frac{ig}{\sqrt{2}} A_{\mu} 
+\ese 
+we can write the field strength simply as 
+\bse 
+    F_{\mu\nu} = \frac{\sqrt{2}i}{g} [D_{\mu},D_{\nu}]
+\ese 
+
+We know that the Lagrangian has the gauge symmetry 
+\bse 
+    A_{\mu} \to U A_{\mu} U^{\dagger} + \frac{i}{g}U(\p_{\mu}U^{\dagger}) \qquad U \in SU(N).
+\ese
+This gives the transformation 
+\bse 
+    F_{\mu\nu} \to U F_{\mu\nu} U^{\dagger}
+\ese
+which is easily seen from checking that\footnote{Really we shouldn't say that $D_{\mu}$ transforms in this way but rather that $D_{\mu}\psi \to U D_{\mu} \psi$ where $\psi$ is a field that transforms as $\psi \to U \psi$. However it is standard to write it like this and the idea is clear.}
+\bse 
+    D_{\mu} \to U D_{\mu} U^{\dagger}.
+\ese 
+
+\br 
+    Note that we were careful to say that the \textit{Lagrangian} is gauge invariant, not the field strength itself. In other words the field strength is gauge \textit{covariant}. This is easily checked using the cyclicity of the trace and $U^{-1}=U^{\dagger}$ for $SU(N)$. This point is just highlighted because in the abelian case we had that the field strength itself was gauge invariant.
+\er 
+
+Next recall that this gauge transformation introduces a redundancy into the system. We fix this redundancy in the path integral formulation by using the Fadeev-Popov procedure.\footnote{See the QFT II course for more details.} This essentially boils down to adding a new term to the action 
+\bse 
+    \cL = - \frac{1}{4}\Tr[F_{\mu\nu}F^{\mu\nu}] - \frac{1}{2}\Tr[G G] + \cL_{\text{ghosts}},
+\ese 
+where $G(x)$ is a \textit{gauge fixing function}. The ghost terms we will neglect as we are only concerned with amplitudes (which only know about external on-shell particles) and so the ghosts never appear (they only flow through loops). 
+
+For the gauge fixing condition we will choose 
+\mybox{
+\be 
+\label{eqn:GervaisNeveuGauge}
+    G(x) = \p_{\mu} A^{\mu} - \frac{ig}{\sqrt{2}} A_{\mu}A^{\mu}
+\ee 
+}
+\noindent this is known as the \textit{Gervais-Neveu gauge}. 
+
+\br 
+    Note that if we set $g=0$ then we just get a Lorenz gauge result. 
+\er 
+
+The reason we take this choice is because then the Lagrangian simply becomes 
+\bse 
+    \cL = \Tr[ \frac{1}{2} A_{\mu}\p^2 A^{\mu} - i \sqrt{2} g \p^{\mu}A^{\nu}A_{\nu} A_{\mu} + \frac{1}{4}g^2 A^{\mu}A^{\nu}A_{\mu}A_{\nu}]. 
+\ese 
+
+\section{Feynman Diagrams In Double Line Notation}
+
+We want to get the Feynman rules for this. We shall use a "quick and dirty" way to get them. We will obtain the Feynman rules in terms of \textit{matrix valued} expressions. This is different to what we normally do, where we normally have explicit colour indices. In other words, normally we obtain Feynman rules for the $A_{\mu}^a$s, but here we are going to write them down for ${(A_{\mu})_i}^j = A_{\mu}^a (T^a{)_i}^j$. We will of course need to keep track of how the matrix indices are contracted and this will give rise to what are known as \textit{ribbon diagrams}, which use so-called \textit{double line notation}. 
+
+We start with the propagator. This is extracted from the kinetic term:\footnote{Our gluons are massless so we only need this term. That is normally we also consider the mass term when finding the propagator.}
+\bse 
+    \frac{1}{2}{(A_{\mu})_i}^j \p^2 {(A^{\mu})_j}^i = \frac{1}{2} {(A_{\mu})_i}^j \p^2 {(A_{\nu})_m}^{\ell} \eta^{\mu\nu} \del^i_{\ell} \del^m_j,
+\ese 
+where the right hand side just shows the contractions explicitly. We depict this in terms of the double line diagrams:
+\begin{center}
+    \btik 
+        \midarrow (1,0.2) -- (-1,0.2);
+        \midarrow (-1,-0.2) -- (1,-0.2) node [midway, below] {$p$};
+        \node at (-1.2,-0.2) {$j$};
+        \node at (1.2,0.2) {$\ell$};
+        \node at (-1.2,0.2) {$i$};
+        \node at (1.2,-0.2) {$m$};
+        \node at (-1.5,0) {$\mu$};
+        \node at (1.5,0) {$\nu$};
+        \node[right] at (2,0) {\Large{$=$}};
+        \node[right] at (3,0.1) {\huge{$- \frac{ i \eta^{\mu\nu} \del_{\ell}^i \del_j^m }{p^2+i\epsilon}$}};
+    \etik 
+\end{center}
+
+Let's clear up any potential confusion on how to construct such a diagram and obtain the mathematical expression from it.
+\begin{itemize}
+    \item This is not two particles propagating but a single propagator. The two lines correspond to the fact we have $2$ $A$s.
+    \item You label the end of each double line with the Lorentz structure, $\mu/\nu$ 
+    \item You label each the end of each line with the matrix indices, $i,j$ etc.
+    \item You join contracted indices with the convention that the arrow points from the lower index on the $\del$ to the upper index on the $\del$. This corresponds to pointing from the upper index on one $A$ to the lower index on the other $A$. Note this will always result in adjacent lines pointing in opposite directions.
+    \item You then obtain the mathematical expression from the above with the usual Feynman rules:
+        \ben[label=(\alph*)]
+            \item Factor of $i$ from $e^{iS}$
+            \item Minus sign from $\p^2 \to -p^2$ 
+            \item Contour argument to get $+i\epsilon$ in denominator
+        \een 
+\end{itemize}
+
+Next we look at the three point vertex. We now have to be a bit more careful because more things are contracted and ordering matters. First let's write down the term in the Lagrangian that gives rise to it in matrix form:
+\bse 
+    -i\sqrt{2} \, g \, \p_{\mu} (A_{\nu}{)_k}^j (A^{\nu}{)_j}^i (A^{\mu}{)_i}^k
+\ese 
+Now follow the proscription given above to draw:
+
+\begin{center}
+    \btik[scale=1.5]
+        \midarrow (-1,-1) -- (-0.2,0);
+        \midarrow (-0.2,0) -- (-0.2,1);
+        \midarrow  (0.2,0) -- (1,-1);
+        \midarrow (0.2,1) -- (0.2,0);
+        \midarrow (0.6,-1) -- (0,-0.2);
+        \midarrow (0,-0.2) -- (-0.6,-1);
+        % 
+        \node at (-1.1,-1.1) {$n$};
+        \node at (-0.7,-1.1) {$m$};
+        \node at (1.1,-1.1) {$k$};
+        \node at (0.7,-1.1) {$\ell$};
+        \node at (0.2,1.2) {$j$};
+        \node at (-0.2,1.2) {$i$};
+        %
+        \node at (-0.9,-1.4) {\large{$\mu,p$}};
+        \node at (0.9,-1.4) {\large{$\rho,r$}};
+        \node at (0,1.5) {\large{$\nu,q$}};
+    \etik   
+\end{center}
+where we have now labelled the momentum next to the Lorentz index. Mathematically this diagram corresponds to 
+\bse 
+    i (-i\sqrt{2}g) \del^i_n \del^m_{\ell} \del^k_j \big( (-iq_{\nu})  \eta_{\nu\rho} + \text{cyclic permutations} \big) = -i \sqrt{2} \, g \, (q_{\mu}\eta_{\nu\rho} + r_{\nu}\eta_{\rho\mu} + p_{\rho} \eta_{\mu\nu}) \del_n^i \del_j^k \del_{\ell}^m,
+\ese 
+where we get the momentum terms from the derivative term. 
+
+Finally let's look at the four point interaction:
+\bse 
+    \frac{1}{4}g^2 (A^{\mu}{)_j}^i (A^{\nu}{)_i}^k (A_{\mu}{)_k}^{\ell}  (A_{\nu}{)_{\ell}}^j 
+\ese 
+This is a little nicer because it doesn't contain a derivative. The diagram is simply 
+\begin{center}
+    \btik
+        \midarrow (-1.7,-1.5) -- (-0.2,0);
+        \midarrow (-0.2,0) -- (-1.7,1.5);
+        \node at (-1.9,-1.6) {$q$};
+        \node at (-1.9,1.6) {$i$};
+        \begin{scope}[rotate around={90:(0,0)}]
+            \midarrow (-1.7,-1.5) -- (-0.2,0);
+            \midarrow (-0.2,0) -- (-1.7,1.5);
+            \node at (-1.9,-1.6) {$n$};
+            \node at (-1.9,1.6) {$p$};
+        \end{scope}
+        \begin{scope}[rotate around={-90:(0,0)}]
+            \midarrow (-1.7,-1.5) -- (-0.2,0);
+            \midarrow (-0.2,0) -- (-1.7,1.5);
+            \node at (-1.9,-1.6) {$j$};
+            \node at (-1.9,1.6) {$k$};
+        \end{scope}
+        \begin{scope}[rotate around={180:(0,0)}]
+            \midarrow (-1.7,-1.5) -- (-0.2,0);
+            \midarrow (-0.2,0) -- (-1.7,1.5);
+            \node at (-1.9,-1.6) {$\ell$};
+            \node at (-1.9,1.6) {$m$};
+        \end{scope}
+        % 
+        \node at (-2.1,2) {\large{$\mu$}};
+        \node at (-2.1,-2) {\large{$\l$}};
+        \node at (2.1,2) {\large{$\nu$}};
+        \node at (2.1,-2) {\large{$\rho$}};
+        \node[right] at (2.5,0) {\Large{$= \, i g^2 \del^i_q \del^k_j \del^m_{\ell} \del^p_n \eta_{\mu\rho}\eta_{\nu\l} $}};
+    \etik
+\end{center}
+Note that there is no factor of $4$ from the cyclic permutations. 
+
+\subsection{Colour-Ordered Amplitudes}
+
+We can now compute some amplitudes, and we start with the 3-point amplitude. The idea is to insert a factor of $T^a$ at each vertex and take the trace, this then allows us to extract the field $A_{\mu}^a$ via \Cref{eqn:AmuaFromAmu}. We then also have to include the polarisation vector, so in total we have:
+\begin{center}
+    \btik 
+        \draw[thick, ->] (0,0) -- (0,1.5) node [above] {$a_1,p_1,\epsilon_1$};
+        \draw[thick, ->, rotate around={120:(0,0)}] (0,0) -- (0,1.5) node [below] {$a_3,p_3,\epsilon_3$};
+        \draw[thick, ->, rotate around={-120:(0,0)}] (0,0) -- (0,1.5) node [below] {$a_2,p_2,\epsilon_2$};
+        \node at (3.5,0.5) {\Large{$=$}};
+        \begin{scope}[xshift=7cm, yshift=0.25cm]
+            \midarrow (-1,-1) -- (-0.2,0);
+            \midarrow (-0.2,0) -- (-0.2,1);
+            \midarrow  (0.2,0) -- (1,-1);
+            \midarrow (0.2,1) -- (0.2,0);
+            \midarrow (0.6,-1) -- (0,-0.2);
+            \midarrow (0,-0.2) -- (-0.6,-1);
+            % 
+            \node at (-1.1,-1.1) {$n$};
+            \node at (-0.7,-1.1) {$m$};
+            \node at (1.1,-1.1) {$k$};
+            \node at (0.7,-1.1) {$\ell$};
+            \node at (0.2,1.2) {$j$};
+            \node at (-0.2,1.2) {$i$};
+            %
+            \node at (-0.9,-1.4) {$\mu$};
+            \node at (0.9,-1.4) {$\rho$};
+            \node at (0,1.5) {$\nu$};
+            %
+            \node at (0,2) {$(T^{a_1}{)_i}^j \epsilon_1^{\nu}$};
+            \node at (1.2,-1.8) {$(T^{a_2}{)_k}^{\ell} \epsilon_2^{\rho}$};
+            \node at (-1.2,-1.8) {$(T^{a_3}{)_m}^n \epsilon_3^{\mu}$};
+            \node[right] at (2,0) {\large{$+$ perms of $(1,2,3)$}};
+        \end{scope}
+    \etik 
+\end{center}
+
+We can then use this to obtain 
+\bse 
+    iT_3 = -i\sqrt{2}g \Tr[T^{a_1}T^{a_2}T^{a_3}] \big( \epsilon_1\cdot \epsilon_2 p_1\cdot \epsilon_3 + \epsilon_2\cdot\epsilon_3 p_2\cdot \epsilon_1 + \epsilon_3\cdot \epsilon_1 p_3 \cdot \epsilon_2\big) + (2 \leftrightarrow 3),
+\ese 
+where the second part is to account for the non-cyclic permutations; the cyclic permutations are already taken care of in our Feynman rules. 
+
+We did this calculation for the 3-point vertex, but the claim is that more generally, using the double line notation, we see that all \textit{tree-level} amplitudes can be written as 
+\mybox{
+    \be
+    \label{eqn:iTn}
+        iT_n = g^{n-2} \sum_{\substack{\text{non-cyclic} \\ \text{perms}}} \Tr[T^{a_1} ... T^{a_n}] A(1,...,n)
+    \ee 
+}
+\noindent where the $A(1,...,n)$ is a purely kinematical thing known as the \textit{colour ordered amplitude} and is sum over all diagrams with a fixed cyclic ordering of the gluons and no crossed lines. The colour ordered amplitude knows nothing about the group theoretic piece (i.e. the colour structure), which is all in the trace. The sum, which is over non-cyclic permutations, can be expressed as the sum over permutations of legs $2,...,n$ holding leg $1$ fixed. 
+
+This is not a trivial result so let's summarise the main points: 
+\ben[label=(\roman*)] 
+    \item We can reduce the calculation of an $n$-point \textit{tree level} amplitude to the calculation of colour-ordered amplitudes. We then get the full amplitude by "\textit{colour-dressing}": multiply by a cyclically ordered colour factor (the trace) and sum over non-cyclic permutations.
+    \item The colour ordered amplitudes are cyclically symmetric,
+    \bse 
+        A(1,2,...,n) = A(2,...,n,1),
+    \ese 
+    which can be seen from the fact that the trace is cyclically symmetric. 
+    \item We compute the colour ordered amplitudes using our double line notation Feynman rules derived before. We state these colour ordered Feynman rules in the next table.
+\een 
+
+\mybox{
+    \begin{center}
+    	\begin{tabular}{@{} C{4cm} C{4cm} C{4cm} @{}}
+    		\toprule
+    		Name & Diagram & Math Expression \\ 
+    		\midrule
+    		Propagator & \btik 
+    		    \midarrow (0,0) -- (1.5,0) node [midway, below] {$p$};
+    		    \node at (-0.2,0) {$\mu$};
+    		    \node at (1.7,0) {$\nu$};
+    		\etik & \bse 
+    		    -\frac{i\eta_{\mu\nu}}{p^2+i\epsilon}
+    		\ese \\ 
+    		3-Point Vertex & \btik 
+    		    \midarrow (0,0) -- (0,1) node [above] {$\mu_1,p_1$};
+    		    \midarrow[rotate around={120:(0,0)}] (0,0) -- (0,1) node [below] {$\mu_3,p_3$};
+    		    \midarrow[rotate around={-120:(0,0)}] (0,0) -- (0,1) node [below] {$\mu_2,p_2$};
+    		\etik & \bse
+    		    \begin{split}
+    		           -i \sqrt{2} \big( \eta^{\mu_1\mu_2} p_1^{\mu_3} \\
+    		           \quad + \eta^{\mu_2\mu_3} p_2^{\mu_1} \\
+    		           \quad + \eta^{\mu_3\mu_1} p_3^{\mu_2} \big)
+    		    \end{split}
+    		\ese \\
+    		4-Point Vertex & \btik 
+    		    \midarrow[rotate around={45:(0,0)}] (0,0) -- (0,1) node [above] {$\mu_1$};
+    		    \midarrow[rotate around={-45:(0,0)}] (0,0) -- (0,1)  node [above] {$\mu_2$};
+    		    \midarrow[rotate around={45:(0,0)}] (0,0) -- (0,-1)  node [below] {$\mu_3$};
+    		    \midarrow[rotate around={-45:(0,0)}] (0,0) -- (0,-1)  node [below] {$\mu_4$};
+    		\etik  & \bse 
+    		    i \eta^{\mu_1\mu_3} \eta^{\mu_2\mu_4}
+    		\ese \\
+    		\bottomrule
+    	\end{tabular}
+    \end{center}
+}
+
+Note we have dropped the factors of $g$ and the $\del$s. We are no longer using double line notation, since colour ordered amplitudes do not contain information about colour. It is understood that these vertices will be used to construct diagrams with fixed cyclic ordering of external legs and no crossed lines. 
