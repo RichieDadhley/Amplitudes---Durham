@@ -124,14 +124,14 @@ then we have
 \ese 
 From this only the middle term in \Cref{eqn:A--+} survives:
 \bse 
-    A(1^-,2^-,3^+) = \frac{\la q_3 2 \ra [3q_2]}{\la q_3 3 \ra} \frac{ [q_1 2] \la 21 \ra }{[1q_1]},
+    A(1^-,2^-,3^+) = \frac{\la q_3 2 \ra [3q_2]}{\la q_3 3 \ra[q_2 2]} \frac{ [q_1 2] \la 21 \ra }{[1q_1]},
 \ese 
 where we have used a notation where just a number means $p$, i.e. $\la q_3 2 \ra = \la q_3 p_2\ra$. Then we use our reference momenta definitions to replace 
 \bse 
     \begin{split}
         \la q_3 2 \ra & \longrightarrow \la 12 \ra \\
-        \la q_3 2 \ra & \longrightarrow \la 12 \ra \\
-        [q_1 2] & \longrightarrow [q_1 2] \\
+        \la q_3 3 \ra & \longrightarrow \la 13 \ra \\
+        [q_1 2] & \longrightarrow [q_2 2] \\
         [1 q_1] & \longrightarrow [1q_2],
     \end{split}
 \ese 
@@ -143,9 +143,9 @@ where we have also used $\la 21 \ra = -\la 12 \ra$.
 
 This is nice, but really we want to remove the reference momenta from the expression. We do this by considering momentum conservation 
 \bse 
-    \l_1 \widetilde{\l}_1 + \l_2 \widetilde{\l}_2 + \l_3 \widetilde{\l}_3 = 0,
+    \widetilde{\l}_1 \l_1  +  \widetilde{\l}_2 \l_2 +  \widetilde{\l}_3 \l_3 = 0,
 \ese 
-which if we contract with $\l_2 \widetilde{\mu}_2$ we get 
+which if we contract with $\widetilde{\mu}_2\l_2$ we get 
 \be 
 \label{eqn:3q21q2}
     \la 21 \ra [1q_2] + \la 23 \ra [3 q_2] = 0 \qquad \implies \qquad \frac{[3q_2]}{[1q_2]} = \frac{\la 12\ra }{\la 23 \ra}. 
